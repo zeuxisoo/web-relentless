@@ -10,6 +10,10 @@ class ApiController extends Controller {
         return Auth::guard('api');
     }
 
+    protected function currentUser() {
+        return request()->user();
+    }
+
     protected function respondWithOK($message, $status = 200) {
         return response()->json([
             "ok"   => true,
