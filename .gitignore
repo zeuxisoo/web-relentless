@@ -19,3 +19,5 @@ yarn-error.log
 /public/assets/css
 /public/assets/workbox
 composer.phar
+*.sqlite
+*.db
