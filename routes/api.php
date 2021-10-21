@@ -1,6 +1,7 @@
 <?php
 
 use App\Api\Version1\Controllers\AuthController;
+use App\Api\Version1\Controllers\FoodController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,13 @@ Route::prefix("v1")->group(function() {
 
         Route::middleware(["auth:sanctum"])->group(function() {
             Route::get("logout", [AuthController::class, 'logout'])->name('api.auth.logout');
+        });
+    });
+
+    Route::middleware(["auth:sanctum"])->group(function() {
+        // api.food.*
+        Route::prefix("food")->group(function() {
+            Route::post("store", [FoodController::class, 'store'])->name('api.food.store');
         });
     });
 

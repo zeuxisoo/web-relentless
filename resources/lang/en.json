@@ -6,5 +6,8 @@
     "Invalid credentials, cannot generate token in this stage": "Invalid credentials, cannot generate token in this stage",
     "Successfully logged out": "Successfully logged out",
     "Please enter account": "Please enter account",
-    "Please enter password": "Please enter password"
+    "Please enter password": "Please enter password",
+    "Please enter name": "Please enter name",
+    "Please enter unit": "Please enter unit",
+    "Food name already exists": "Food name already exists"
 }
