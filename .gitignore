@@ -14,4 +14,8 @@ yarn-error.log
 /.idea
 /.vscode
 
-/composer.phar
+/public/mix-manifest.json
+/public/assets/js
+/public/assets/css
+/public/assets/workbox
+composer.phar
