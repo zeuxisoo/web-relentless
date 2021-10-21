@@ -14,6 +14,19 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        // Stop the redirect when request url start from `api/*`
+        // e.g. not redirect to /login when url start from `api/*` and not logged in
+        if ($request->is('api/*')) {
+            abort(
+                response()->json([
+                    'ok'   => false,
+                    'data' => [
+                        'message' => __('Authentication required, Please login first'),
+                    ]
+                ], 401)
+            );
+        }
+
         if (! $request->expectsJson()) {
             return route('login');
         }
