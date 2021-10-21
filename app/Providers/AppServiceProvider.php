@@ -26,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // N+1
+        Model::preventLazyLoading(app()->isProduction() === false);
+
         // Custom Sanctum access token model
         Sanctum::usePersonalAccessTokenModel(UserAccessToken::class);
     }
