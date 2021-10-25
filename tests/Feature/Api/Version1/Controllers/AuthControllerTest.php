@@ -6,7 +6,7 @@ use Tests\Feature\Api\Version1\Bases\ApiControllerTestCase;
 class AuthControllerTest extends ApiControllerTestCase {
 
     // api.auth.login
-    public function test_login_when_all_fields_are_empty() {
+    public function test_login_failed_when_form_data_are_empty() {
         $response = $this->post('/api/v1/auth/login');
         $response
             ->assertStatus(422)
@@ -17,7 +17,7 @@ class AuthControllerTest extends ApiControllerTestCase {
             ]);
     }
 
-    public function test_login_when_account_filled_only() {
+    public function test_login_failed_when_account_filled_only() {
         $response = $this->post('/api/v1/auth/login', [
             'account' => 'staff',
         ]);
@@ -31,7 +31,7 @@ class AuthControllerTest extends ApiControllerTestCase {
             ]);
     }
 
-    public function test_login_when_password_incorrect() {
+    public function test_login_failed_when_password_incorrect() {
         $response = $this->post('/api/v1/auth/login', [
             'account'  => 'user',
             'password' => 'wrong-password',
@@ -47,7 +47,7 @@ class AuthControllerTest extends ApiControllerTestCase {
             ]);
     }
 
-    public function test_login_when_account_not_found() {
+    public function test_login_failed_when_account_not_found() {
         $response = $this->post('/api/v1/auth/login', [
             'account'  => 'user-no-found',
             'password' => 'correct-password',
@@ -63,7 +63,7 @@ class AuthControllerTest extends ApiControllerTestCase {
             ]);
     }
 
-    public function test_login_when_form_data_correct() {
+    public function test_login_ok_when_form_data_correct() {
         $response = $this->post('/api/v1/auth/login', [
             'account'  => 'user',
             'password' => 'user-user',
@@ -81,7 +81,7 @@ class AuthControllerTest extends ApiControllerTestCase {
     }
 
     // api.auth.logout
-    public function test_logout_when_not_logged_in() {
+    public function test_logout_failed_when_not_logged_in() {
         $response = $this->get('/api/v1/auth/logout');
 
         $response
@@ -94,7 +94,7 @@ class AuthControllerTest extends ApiControllerTestCase {
             ]);
     }
 
-    public function test_logout_when_logged_in() {
+    public function test_logout_ok_when_logged_in() {
         $response = $this
             ->withAuthorization()
             ->get('/api/v1/auth/logout');
