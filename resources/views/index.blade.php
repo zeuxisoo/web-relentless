@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#1266F1" />
 
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="{{ __('LifeNote') }}" />
+<meta name="apple-mobile-web-app-title" content="{{ __('Title') }}" />
 <meta name="apple-mobile-web-app-status-bar-style" content="white">
 
 <meta name="mobile-web-app-capable" content="yes">
@@ -19,7 +19,7 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
 @endif
 
-<title>{{ __('LifeNote') }}</title>
+<title>{{ __('Title') }}</title>
 
 <link rel="icon" sizes="24x24" type="image/png" href="{{ asset('assets/icons/icon_24.png') }}" />
 <link rel="manifest" href="manifest.json" />
