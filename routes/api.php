@@ -2,6 +2,7 @@
 
 use App\Api\Version1\Controllers\AuthController;
 use App\Api\Version1\Controllers\FoodController;
+use App\Api\Version1\Controllers\FoodUnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,11 @@ Route::prefix("v1")->group(function() {
         // api.food.*
         Route::prefix("food")->group(function() {
             Route::post("store", [FoodController::class, 'store'])->name('api.food.store');
+
+            // api.food.unit.*
+            Route::prefix("unit")->group(function() {
+                Route::post("store", [FoodUnitController::class, 'store'])->name('api.food.unit.store');
+            });
         });
     });
 
