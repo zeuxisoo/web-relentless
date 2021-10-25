@@ -3,7 +3,7 @@ namespace App\Api\Version1\Requests;
 
 use App\Api\Version1\Bases\ApiRequest;
 
-class FoodStoreRequest extends ApiRequest {
+class FoodNameStoreRequest extends ApiRequest {
 
     public function authorize() {
         return true;
@@ -11,7 +11,7 @@ class FoodStoreRequest extends ApiRequest {
 
     public function rules() {
         return [
-            'name' => 'required|unique:foods,name',
+            'name' => 'required|unique:food_names,name',
         ];
     }
 

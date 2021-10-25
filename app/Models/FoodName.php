@@ -5,11 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class Food extends Model {
+class FoodName extends Model {
 
     use SoftDeletes;
-
-    protected $table = "foods"; // set the table name is plural not singular
 
     protected $fillable = ['name'];
 

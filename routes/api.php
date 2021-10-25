@@ -1,7 +1,7 @@
 <?php
 
 use App\Api\Version1\Controllers\AuthController;
-use App\Api\Version1\Controllers\FoodController;
+use App\Api\Version1\Controllers\FoodNameController;
 use App\Api\Version1\Controllers\FoodUnitController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +32,12 @@ Route::prefix("v1")->group(function() {
     });
 
     Route::middleware(["auth:sanctum"])->group(function() {
-        // api.food.*
+        // api.food.*.*
         Route::prefix("food")->group(function() {
-            Route::post("store", [FoodController::class, 'store'])->name('api.food.store');
+            // api.food.name.*
+            Route::prefix("name")->group(function() {
+                Route::post("store", [FoodNameController::class, 'store'])->name('api.food.store');
+            });
 
             // api.food.unit.*
             Route::prefix("unit")->group(function() {

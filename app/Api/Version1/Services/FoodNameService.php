@@ -1,12 +1,12 @@
 <?php
 namespace App\Api\Version1\Services;
 
-use App\Models\Food;
+use App\Models\FoodName;
 
-class FoodService {
+class FoodNameService {
 
     public function create($data) {
-        return Food::create($data);
+        return FoodName::create($data);
     }
 
 }
