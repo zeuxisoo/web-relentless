@@ -8,6 +8,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ApiRequest extends FormRequest {
 
+    protected $stopOnFirstFailure = true;
+
     // Override the default validation failed handler,
     // When missing `Accept: application/json` in header, the response json do not redirect back
     protected function failedValidation(Validator $validator) {
