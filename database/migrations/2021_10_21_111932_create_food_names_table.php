@@ -16,7 +16,7 @@ class CreateFoodNamesTable extends Migration
         Schema::create('food_names', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->softDeletes();
             $table->timestamps();
         });

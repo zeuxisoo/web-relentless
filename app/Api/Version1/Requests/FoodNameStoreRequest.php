@@ -2,6 +2,8 @@
 namespace App\Api\Version1\Requests;
 
 use App\Api\Version1\Bases\ApiRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class FoodNameStoreRequest extends ApiRequest {
 
@@ -11,7 +13,10 @@ class FoodNameStoreRequest extends ApiRequest {
 
     public function rules() {
         return [
-            'name' => 'required|unique:food_names,name',
+            'name' => [
+                'required',
+                Rule::unique("food_names")->where('user_id', Auth::id())
+            ],
         ];
     }
 
