@@ -51,13 +51,13 @@ class FoodUnitControllerTest extends ApiControllerTestCase {
             ]);
 
         $response
-            ->assertStatus(201)
+            ->assertStatus(200)
             ->assertJsonStructure([
-                "id",
-                "user_id",
-                "name",
-                "created_at",
-                "updated_at"
+                "ok",
+                "data" => [
+                    "id",
+                    "name",
+                ]
             ]);
     }
 

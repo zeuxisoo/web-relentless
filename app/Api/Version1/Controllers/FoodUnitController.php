@@ -4,6 +4,7 @@ namespace App\Api\Version1\Controllers;
 use App\Api\Version1\Bases\ApiController;
 use App\Api\Version1\Requests\FoodUnitStoreRequest;
 use App\Api\Version1\Services\FoodUnitService;
+use App\Api\Version1\Transformers\FoodUnitTransformer;
 
 class FoodUnitController extends ApiController {
 
@@ -17,7 +18,7 @@ class FoodUnitController extends ApiController {
         $input = $request->only('name');
         $food  = $this->foodUnitService->create($input);
 
-        return $food;
+        return fractal($food, new FoodUnitTransformer());
     }
 
 }
