@@ -27,11 +27,21 @@ class FoodUnitControllerTest extends ApiControllerTestCase {
     }
 
     public function test_store_failed_when_name_is_empty() {
-        $response = $this
-            ->withAuthorization()
-            ->post('/api/v1/food/unit/store', [
-                "name" => ""
+        $response = $this->createFoodUnit();
+
+        $response
+            ->assertStatus(422)
+            ->assertJsonStructure([
+                "ok",
+                "errors" => [
+                    "name"
+                ]
             ]);
+    }
+
+    public function test_store_failed_when_name_already_exists() {
+        $response = $this->createFoodUnit('cup'); // first : ok
+        $response = $this->createFoodUnit('cup'); // second: failed
 
         $response
             ->assertStatus(422)
@@ -44,11 +54,7 @@ class FoodUnitControllerTest extends ApiControllerTestCase {
     }
 
     public function test_store_ok_when_form_data_correct() {
-        $response = $this
-            ->withAuthorization()
-            ->post('/api/v1/food/unit/store', [
-                "name" => "cup"
-            ]);
+        $response = $this->createFoodUnit('cup');
 
         $response
             ->assertStatus(200)
@@ -58,6 +64,15 @@ class FoodUnitControllerTest extends ApiControllerTestCase {
                     "id",
                     "name",
                 ]
+            ]);
+    }
+
+    // Helper methods
+    public function createFoodUnit(string $name = '') {
+        return $this
+            ->withAuthorization()
+            ->post('/api/v1/food/unit/store', [
+                "name" => $name
             ]);
     }
 
