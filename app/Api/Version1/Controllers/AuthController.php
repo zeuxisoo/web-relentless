@@ -1,7 +1,6 @@
 <?php
 namespace App\Api\Version1\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\NewAccessToken;
 use App\Api\Version1\Bases\ApiController;
@@ -24,7 +23,7 @@ class AuthController extends ApiController {
         return $this->respondWithToken($token);
     }
 
-    public function logout(Request $request) {
+    public function logout() {
         $this->currentUser()->currentAccessToken()->delete();
 
         return $this->respondWithOK(trans('Successfully logged out'));

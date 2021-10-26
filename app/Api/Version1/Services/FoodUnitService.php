@@ -5,7 +5,7 @@ use App\Models\FoodUnit;
 
 class FoodUnitService {
 
-    public function create($data) {
+    public function create(array $data) {
         return FoodUnit::create($data);
     }
 

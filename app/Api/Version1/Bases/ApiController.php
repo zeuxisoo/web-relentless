@@ -14,7 +14,7 @@ class ApiController extends Controller {
         return request()->user();
     }
 
-    protected function respondWithOK($message, $status = 200) {
+    protected function respondWithOK(string $message, int $status = 200) {
         return response()->json([
             "ok"   => true,
             "data" => [
@@ -23,7 +23,7 @@ class ApiController extends Controller {
         ], $status);
     }
 
-    protected function respondWithError($message, $status = 200) {
+    protected function respondWithError(string $message, int $status = 200) {
         return response()->json([
             "ok"   => false,
             "data" => [
@@ -32,7 +32,7 @@ class ApiController extends Controller {
         ], $status);
     }
 
-    protected function respondWithJson($data, $status = 200) {
+    protected function respondWithJson(array $data, int $status = 200) {
         return response()->json([
             'ok'   => true,
             'data' => $data

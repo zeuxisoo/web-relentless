@@ -5,7 +5,7 @@ use App\Models\FoodName;
 
 class FoodNameService {
 
-    public function create($data) {
+    public function create(array $data) {
         return FoodName::create($data);
     }
 
