@@ -1,7 +1,12 @@
 <?php
-namespace Tests\Feature\Api\Version1\Controllers\Traits\FoodName;
+namespace Tests\Feature\Api\Version1\Controllers\FoodName;
 
-trait StoreTestable {
+use Tests\Feature\Api\Version1\Bases\ApiControllerTestCase;
+use Tests\Feature\Api\Version1\Traits\FoodNameAction;
+
+class FoodNameControllerStoreTest extends ApiControllerTestCase {
+
+    use FoodNameAction;
 
     public function test_store_failed_when_form_data_are_empty() {
         $response = $this

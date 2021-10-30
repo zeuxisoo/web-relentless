@@ -1,7 +1,12 @@
 <?php
-namespace Tests\Feature\Api\Version1\Controllers\Traits\FoodName;
+namespace Tests\Feature\Api\Version1\Controllers\FoodName;
 
-trait UpdateTestable {
+use Tests\Feature\Api\Version1\Bases\ApiControllerTestCase;
+use Tests\Feature\Api\Version1\Traits\FoodNameAction;
+
+class FoodNameControllerUpdateTest extends ApiControllerTestCase {
+
+    use FoodNameAction;
 
     public function test_update_failed_when_id_empty() {
         $response = $this->updateFoodName('', 'apple-updated');
