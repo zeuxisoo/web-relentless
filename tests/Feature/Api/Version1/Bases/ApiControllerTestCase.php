@@ -9,6 +9,8 @@ class ApiControllerTestCase extends TestCase {
 
     protected string $accessToken = "";
 
+    protected mixed $currentUser = null;
+
     protected array $users = [
         1 => ['account' => 'user', 'password' => 'user-user'],
     ];
@@ -43,6 +45,7 @@ class ApiControllerTestCase extends TestCase {
         $token   = $data->accessToken;
 
         $this->accessToken = $token;
+        $this->currentUser = User::find($userId);
 
         return $this;
     }

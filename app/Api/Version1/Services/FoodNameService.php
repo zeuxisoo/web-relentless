@@ -20,4 +20,8 @@ class FoodNameService {
         return $foodName;
     }
 
+    public function list(int $perPage = 8) {
+        return FoodName::paginate($perPage);
+    }
+
 }

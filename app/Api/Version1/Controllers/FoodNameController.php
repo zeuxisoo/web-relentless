@@ -29,4 +29,10 @@ class FoodNameController extends ApiController {
         return fractal($foodName, new FoodNameTransformer());
     }
 
+    public function list() {
+        $foodNames = $this->foodNameService->list();
+
+        return fractal($foodNames, new FoodNameTransformer());
+    }
+
 }
