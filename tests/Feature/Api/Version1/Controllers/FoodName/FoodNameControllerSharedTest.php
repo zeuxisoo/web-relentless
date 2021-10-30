@@ -8,6 +8,9 @@ class FoodNameControllerSharedTest extends ApiControllerTestCase {
     public function test_protected_routes() {
         $response = $this->post('/api/v1/food/name/store');
         $response->assertStatus(401);
+
+        $response = $this->post('/api/v1/food/name/update');
+        $response->assertStatus(401);
     }
 
 }
