@@ -2,11 +2,22 @@
 namespace App\Api\Version1\Services;
 
 use App\Models\FoodUnit;
+use Illuminate\Support\Facades\Auth;
 
 class FoodUnitService {
 
     public function create(array $data) {
         return FoodUnit::create($data);
+    }
+
+    public function update(array $data) {
+        $foodUnit = FoodUnit::where('user_id', Auth::id())->find($data['id']);
+
+        $foodUnit->update([
+            'name' => $data['name']
+        ]);
+
+        return $foodUnit;
     }
 
 }

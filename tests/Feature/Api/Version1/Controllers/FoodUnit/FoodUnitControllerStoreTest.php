@@ -1,17 +1,13 @@
 <?php
-namespace Tests\Feature\Api\Version1\Controllers;
+namespace Tests\Feature\Api\Version1\Controllers\FoodUnit;
 
 use Tests\Feature\Api\Version1\Bases\ApiControllerTestCase;
+use Tests\Feature\Api\Version1\Traits\FoodUnitAction;
 
-class FoodUnitControllerTest extends ApiControllerTestCase {
+class FoodUnitControllerStoreTest extends ApiControllerTestCase {
 
-    // Protected routes test
-    public function test_protected_routes() {
-        $response = $this->post('/api/v1/food/unit/store');
-        $response->assertStatus(401);
-    }
+    use FoodUnitAction;
 
-    // api.food.unit.store
     public function test_store_failed_when_form_data_are_empty() {
         $response = $this
             ->withAuthorization()
@@ -64,15 +60,6 @@ class FoodUnitControllerTest extends ApiControllerTestCase {
                     "id",
                     "name",
                 ]
-            ]);
-    }
-
-    // Helper methods
-    public function createFoodUnit(string $name = '') {
-        return $this
-            ->withAuthorization()
-            ->post('/api/v1/food/unit/store', [
-                "name" => $name
             ]);
     }
 
