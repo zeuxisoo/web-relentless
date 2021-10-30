@@ -36,7 +36,8 @@ Route::prefix("v1")->group(function() {
         Route::prefix("food")->group(function() {
             // api.food.name.*
             Route::prefix("name")->group(function() {
-                Route::post("store", [FoodNameController::class, 'store'])->name('api.food.store');
+                Route::post("store",  [FoodNameController::class, 'store'])->name('api.food.name.store');
+                Route::post("update", [FoodNameController::class, 'update'])->name('api.food.name.update');
             });
 
             // api.food.unit.*

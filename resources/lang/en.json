@@ -10,5 +10,7 @@
     "Please enter food name": "Please enter food name",
     "Food name already exists": "Food name already exists",
     "Please enter food unit name": "Please enter food unit name",
-    "Food unit name already exists": "Food unit name already exists"
+    "Food unit name already exists": "Food unit name already exists",
+    "Please enter food name id": "Please enter food name id",
+    "Food name id is not exists": "Food name id is not exists"
 }
