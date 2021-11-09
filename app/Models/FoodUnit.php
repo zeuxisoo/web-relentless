@@ -14,8 +14,12 @@ class FoodUnit extends Model {
     protected $hidden = [];
 
     protected static function booted() {
-        static::creating(function($food) {
-            $food->user_id = Auth::id();
+        static::creating(function($foodUnit) {
+            $authId = Auth::id();
+
+            if (!property_exists($foodUnit, "user_id") && !empty($authId)) {
+                $foodUnit->user_id = $authId;
+            }
         });
     }
 
