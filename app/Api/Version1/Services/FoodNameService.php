@@ -21,7 +21,7 @@ class FoodNameService {
     }
 
     public function list(int $perPage = 8) {
-        return FoodName::paginate($perPage);
+        return FoodName::where('user_id', Auth::id())->paginate($perPage);
     }
 
     public function search(string $keyword) {
