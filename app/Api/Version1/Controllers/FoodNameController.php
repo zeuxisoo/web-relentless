@@ -2,6 +2,7 @@
 namespace App\Api\Version1\Controllers;
 
 use App\Api\Version1\Bases\ApiController;
+use App\Api\Version1\Requests\FoodNameSearchRequest;
 use App\Api\Version1\Requests\FoodNameStoreRequest;
 use App\Api\Version1\Requests\FoodNameUpdateRequest;
 use App\Api\Version1\Services\FoodNameService;
@@ -31,6 +32,13 @@ class FoodNameController extends ApiController {
 
     public function list() {
         $foodNames = $this->foodNameService->list();
+
+        return fractal($foodNames, new FoodNameTransformer());
+    }
+
+    public function search(FoodNameSearchRequest $request) {
+        $input     = $request->only('keyword');
+        $foodNames = $this->foodNameService->search($input['keyword']);
 
         return fractal($foodNames, new FoodNameTransformer());
     }

@@ -24,4 +24,10 @@ class FoodNameService {
         return FoodName::paginate($perPage);
     }
 
+    public function search(string $keyword) {
+        return FoodName::where('user_id', Auth::id())
+            ->where('name', 'LIKE', '%'.$keyword.'%')
+            ->get();
+    }
+
 }
