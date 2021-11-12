@@ -11,7 +11,7 @@ class FoodNameService {
     }
 
     public function update(array $data) {
-        $foodName = FoodName::where('user_id', Auth::id())->find($data['id']);
+        $foodName = $this->userFoodNameScope()->find($data['id']);
 
         $foodName->update([
             'name' => $data['name']
@@ -21,17 +21,22 @@ class FoodNameService {
     }
 
     public function find(array $data) {
-        return FoodName::where('user_id', Auth::id())->find($data['id']);
+        return $this->userFoodNameScope()->find($data['id']);
     }
 
     public function list(int $perPage = 8) {
-        return FoodName::where('user_id', Auth::id())->paginate($perPage);
+        return $this->userFoodNameScope()->paginate($perPage);
     }
 
     public function search(string $keyword) {
-        return FoodName::where('user_id', Auth::id())
+        return $this->userFoodNameScope()
             ->where('name', 'LIKE', '%'.$keyword.'%')
             ->get();
+    }
+
+    // Shared methods
+    protected function userFoodNameScope() {
+        return FoodName::where('user_id', Auth::id());
     }
 
 }
