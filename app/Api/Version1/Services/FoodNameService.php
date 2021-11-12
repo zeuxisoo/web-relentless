@@ -20,6 +20,10 @@ class FoodNameService {
         return $foodName;
     }
 
+    public function find(array $data) {
+        return FoodName::where('user_id', Auth::id())->find($data['id']);
+    }
+
     public function list(int $perPage = 8) {
         return FoodName::where('user_id', Auth::id())->paginate($perPage);
     }
