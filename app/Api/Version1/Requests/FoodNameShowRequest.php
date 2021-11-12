@@ -12,11 +12,7 @@ class FoodNameShowRequest extends ApiRequest {
     }
 
     public function all($keys = null) {
-        $data = parent::all($keys);
-
-        $data['id'] = $this->route('id');
-
-        return $data;
+        return array_merge(parent::all(), $this->route()->parameters());
     }
 
     public function rules() {
