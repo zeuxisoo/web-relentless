@@ -14,6 +14,9 @@ class FoodNameControllerSharedTest extends ApiControllerTestCase {
 
         $response = $this->get('/api/v1/food/name/list');
         $response->assertStatus(401);
+
+        $response = $this->get('/api/v1/food/name/search');
+        $response->assertStatus(401);
     }
 
 }

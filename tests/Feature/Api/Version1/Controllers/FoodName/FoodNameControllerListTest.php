@@ -2,7 +2,6 @@
 namespace Tests\Feature\Api\Version1\Controllers\FoodName;
 
 use App\Models\FoodName;
-use Illuminate\Support\Facades\Auth;
 use Tests\Feature\Api\Version1\Bases\ApiControllerTestCase;
 use Tests\Feature\Api\Version1\Traits\FoodNameAction;
 
