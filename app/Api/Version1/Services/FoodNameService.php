@@ -10,6 +10,14 @@ class FoodNameService {
         return FoodName::create($data);
     }
 
+    public function list(int $perPage = 8) {
+        return $this->userFoodNameScope()->paginate($perPage);
+    }
+
+    public function find(array $data) {
+        return $this->userFoodNameScope()->find($data['id']);
+    }
+
     public function update(array $data) {
         $foodName = $this->userFoodNameScope()->find($data['id']);
 
@@ -18,14 +26,6 @@ class FoodNameService {
         ]);
 
         return $foodName;
-    }
-
-    public function find(array $data) {
-        return $this->userFoodNameScope()->find($data['id']);
-    }
-
-    public function list(int $perPage = 8) {
-        return $this->userFoodNameScope()->paginate($perPage);
     }
 
     public function search(string $keyword) {

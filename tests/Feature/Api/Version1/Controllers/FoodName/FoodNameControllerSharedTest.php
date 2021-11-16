@@ -9,13 +9,13 @@ class FoodNameControllerSharedTest extends ApiControllerTestCase {
         $response = $this->post('/api/v1/food/name/store');
         $response->assertStatus(401);
 
-        $response = $this->post('/api/v1/food/name/update');
+        $response = $this->get('/api/v1/food/name/list');
         $response->assertStatus(401);
 
         $response = $this->get('/api/v1/food/name/show/1');
         $response->assertStatus(401);
 
-        $response = $this->get('/api/v1/food/name/list');
+        $response = $this->post('/api/v1/food/name/update');
         $response->assertStatus(401);
 
         $response = $this->get('/api/v1/food/name/search');

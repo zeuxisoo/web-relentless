@@ -24,13 +24,6 @@ class FoodNameController extends ApiController {
         return fractal($foodName, new FoodNameTransformer());
     }
 
-    public function update(FoodNameUpdateRequest $request) {
-        $input    = $request->only('id', 'name');
-        $foodName = $this->foodNameService->update($input);
-
-        return fractal($foodName, new FoodNameTransformer());
-    }
-
     public function list() {
         $foodNames = $this->foodNameService->list();
 
@@ -40,6 +33,13 @@ class FoodNameController extends ApiController {
     public function show(FoodNameShowRequest $request) {
         $input    = $request->only('id');
         $foodName = $this->foodNameService->find($input);
+
+        return fractal($foodName, new FoodNameTransformer());
+    }
+
+    public function update(FoodNameUpdateRequest $request) {
+        $input    = $request->only('id', 'name');
+        $foodName = $this->foodNameService->update($input);
 
         return fractal($foodName, new FoodNameTransformer());
     }
