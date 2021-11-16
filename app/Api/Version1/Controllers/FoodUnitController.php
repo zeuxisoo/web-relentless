@@ -22,6 +22,12 @@ class FoodUnitController extends ApiController {
         return fractal($foodUnit, new FoodUnitTransformer());
     }
 
+    public function list() {
+        $foodUnits = $this->foodUnitService->list();
+
+        return fractal($foodUnits, new FoodUnitTransformer());
+    }
+
     public function update(FoodUnitUpdateRequest $request) {
         $input    = $request->only('id', 'name');
         $foodUnit = $this->foodUnitService->update($input);

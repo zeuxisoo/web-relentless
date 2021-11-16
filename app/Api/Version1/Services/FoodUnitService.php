@@ -10,6 +10,10 @@ class FoodUnitService {
         return FoodUnit::create($data);
     }
 
+    public function list(int $perPage = 8) {
+        return FoodUnit::where('user_id', Auth::id())->paginate($perPage);
+    }
+
     public function update(array $data) {
         $foodUnit = FoodUnit::where('user_id', Auth::id())->find($data['id']);
 

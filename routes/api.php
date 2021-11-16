@@ -46,6 +46,7 @@ Route::prefix("v1")->group(function() {
             // api.food.unit.*
             Route::prefix("unit")->group(function() {
                 Route::post("store",  [FoodUnitController::class, 'store'])->name('api.food.unit.store');
+                Route::get("list",    [FoodUnitController::class, 'list'])->name('api.food.unit.list');
                 Route::post("update", [FoodUnitController::class, 'update'])->name('api.food.unit.update');
             });
         });
