@@ -2,6 +2,7 @@
 namespace App\Api\Version1\Controllers;
 
 use App\Api\Version1\Bases\ApiController;
+use App\Api\Version1\Requests\FoodUnitShowRequest;
 use App\Api\Version1\Requests\FoodUnitStoreRequest;
 use App\Api\Version1\Requests\FoodUnitUpdateRequest;
 use App\Api\Version1\Services\FoodUnitService;
@@ -26,6 +27,13 @@ class FoodUnitController extends ApiController {
         $foodUnits = $this->foodUnitService->list();
 
         return fractal($foodUnits, new FoodUnitTransformer());
+    }
+
+    public function show(FoodUnitShowRequest $request) {
+        $input    = $request->only('id');
+        $foodName = $this->foodUnitService->find($input);
+
+        return fractal($foodName, new FoodUnitTransformer());
     }
 
     public function update(FoodUnitUpdateRequest $request) {
