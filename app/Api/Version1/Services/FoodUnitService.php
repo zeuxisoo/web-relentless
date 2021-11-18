@@ -28,4 +28,10 @@ class FoodUnitService {
         return $foodUnit;
     }
 
+    public function search(string $keyword) {
+        return FoodUnit::where('user_id', Auth::id())
+            ->where('name', 'LIKE', '%'.$keyword.'%')
+            ->get();
+    }
+
 }

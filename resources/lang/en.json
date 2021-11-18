@@ -15,5 +15,6 @@
     "Food name id is not exists": "Food name id is not exists",
     "Please enter food unit id": "Please enter food unit id",
     "Food unit id is not exists": "Food unit id is not exists",
-    "Please enter food name keyword": "Please enter food name keyword"
+    "Please enter food name keyword": "Please enter food name keyword",
+    "Please enter food unit keyword": "Please enter food unit keyword"
 }
