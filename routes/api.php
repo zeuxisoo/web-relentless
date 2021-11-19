@@ -1,6 +1,7 @@
 <?php
 
 use App\Api\Version1\Controllers\AuthController;
+use App\Api\Version1\Controllers\FoodMenuController;
 use App\Api\Version1\Controllers\FoodNameController;
 use App\Api\Version1\Controllers\FoodUnitController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,11 @@ Route::prefix("v1")->group(function() {
                 Route::get("show/{id}", [FoodUnitController::class, 'show'])->name('api.food.unit.show');
                 Route::post("update",   [FoodUnitController::class, 'update'])->name('api.food.unit.update');
                 Route::get("search",    [FoodUnitController::class, 'search'])->name('api.food.unit.search');
+            });
+
+            // api.food.menu.*
+            Route::prefix("menu")->group(function() {
+                Route::post("store", [FoodMenuController::class, 'store'])->name('api.food.menu.store');
             });
         });
     });
