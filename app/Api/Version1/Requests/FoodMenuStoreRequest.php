@@ -13,7 +13,7 @@ class FoodMenuStoreRequest extends ApiRequest {
 
     public function rules() {
         return [
-            'start_at' => 'required|date_format:"Y-m-d H:i:s"|after_or_equal:now',
+            'start_at' => 'required|date_format:"Y-m-d H:i:s"',
             'foods'    => 'required|array',
             'tags'     => 'required|array',
             'remark'   => '',
