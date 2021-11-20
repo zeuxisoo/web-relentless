@@ -9,12 +9,20 @@
     "Please enter password": "Please enter password",
     "Please enter food name": "Please enter food name",
     "Food name already exists": "Food name already exists",
-    "Please enter food unit name": "Please enter food unit name",
-    "Food unit name already exists": "Food unit name already exists",
+    "Please enter food unit": "Please enter food unit",
+    "Food unit already exists": "Food unit already exists",
     "Please enter food name id": "Please enter food name id",
     "Food name id is not exists": "Food name id is not exists",
     "Please enter food unit id": "Please enter food unit id",
     "Food unit id is not exists": "Food unit id is not exists",
     "Please enter food name keyword": "Please enter food name keyword",
-    "Please enter food unit keyword": "Please enter food unit keyword"
+    "Please enter food unit keyword": "Please enter food unit keyword",
+    "Please enter start at": "Please enter start at",
+    "Invalid format of field start at": "Invalid format of field start at",
+    "Please enter foods": "Please enter foods",
+    "Invalid format of field foods": "Invalid format of field foods",
+    "Please enter tags": "Please enter tags",
+    "Invalid form of field tags": "Invalid form of field tags",
+    "Food name is not exists": "Food name is not exists",
+    "Food unit is not exists": "Food unit is not exists"
 }

@@ -22,8 +22,8 @@ class FoodUnitStoreRequest extends ApiRequest {
 
     public function messages() {
         return [
-            'name.required' => __("Please enter food unit name"),
-            'name.unique'   => __("Food unit name already exists"),
+            'name.required' => __("Please enter food unit"),
+            'name.unique'   => __("Food unit already exists"),
         ];
     }
 
