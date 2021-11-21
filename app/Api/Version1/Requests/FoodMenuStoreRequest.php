@@ -32,16 +32,16 @@ class FoodMenuStoreRequest extends ApiRequest {
 
     public function messages() {
         return [
-            'start_at.required'             => 'Please enter start at',
-            'start_at.date_format'          => 'Invalid format of field start at',
-            'foods.required'                => 'Please enter foods',
-            'foods.array'                   => 'Invalid format of field foods',
-            'tags.required'                 => 'Please enter tags',
-            'tags.array'                    => 'Invalid form of field tags',
-            'foods.*.food_name_id.required' => 'Please enter food name',
-            'foods.*.food_unit_id.required' => 'Please enter food unit',
-            'foods.*.food_name_id.exists'   => 'Food name is not exists',
-            'foods.*.food_unit_id.exists'   => 'Food unit is not exists',
+            'start_at.required'             => __('Please enter start at'),
+            'start_at.date_format'          => __('Invalid format of field start at'),
+            'foods.required'                => __('Please enter foods'),
+            'foods.array'                   => __('Invalid format of field foods'),
+            'tags.required'                 => __('Please enter tags'),
+            'tags.array'                    => __('Invalid form of field tags'),
+            'foods.*.food_name_id.required' => __('Please enter food name'),
+            'foods.*.food_unit_id.required' => __('Please enter food unit'),
+            'foods.*.food_name_id.exists'   => __('Food name is not exists'),
+            'foods.*.food_unit_id.exists'   => __('Food unit is not exists'),
         ];
     }
 
