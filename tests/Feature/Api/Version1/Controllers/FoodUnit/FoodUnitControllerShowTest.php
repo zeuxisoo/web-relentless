@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Feature\Api\Version1\Controllers\FoodName;
+namespace Tests\Feature\Api\Version1\Controllers\FoodUnit;
 
 use Tests\Feature\Api\Version1\Bases\ApiControllerTestCase;
 use Tests\Feature\Api\Version1\Traits\FoodUnitAction;
