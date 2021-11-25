@@ -44,4 +44,10 @@ class FoodMenuController extends ApiController {
         return fractal($foodMenu, new FoodMenuTransformer());
     }
 
+    public function show(int $id) {
+        $foodMenu = FoodMenu::find($id);
+
+        return fractal($foodMenu, new FoodMenuTransformer());
+    }
+
 }
