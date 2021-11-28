@@ -3,6 +3,7 @@ namespace App\Api\Version1\Controllers;
 
 use App\Api\Version1\Bases\ApiController;
 use App\Api\Version1\Enums\TagCategory;
+use App\Api\Version1\Requests\FoodMenuShowRequest;
 use App\Api\Version1\Requests\FoodMenuStoreRequest;
 use App\Api\Version1\Transformers\FoodMenuTransformer;
 use App\Models\FoodMenu;
@@ -46,7 +47,7 @@ class FoodMenuController extends ApiController {
         return fractal($foodMenu, new FoodMenuTransformer());
     }
 
-    public function show(int $id) { // TODO
+    public function show(FoodMenuShowRequest $id) {
         $foodMenu = FoodMenu::find($id);
 
         return fractal($foodMenu, new FoodMenuTransformer());

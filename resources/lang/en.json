@@ -27,5 +27,7 @@
     "Food unit is not exists": "Food unit is not exists",
     "Please enter food amount": "Please enter food amount",
     "Food amount must be integer": "Food amount must be integer",
-    "Food amount must gether than zero": "Food amount must gether than zero"
+    "Food amount must gether than zero": "Food amount must gether than zero",
+    "Please enter food menu id": "Please enter food menu id",
+    "Food menu id is not exists": "Food menu id is not exists"
 }
