@@ -24,5 +24,8 @@
     "Please enter tags": "Please enter tags",
     "Invalid form of field tags": "Invalid form of field tags",
     "Food name is not exists": "Food name is not exists",
-    "Food unit is not exists": "Food unit is not exists"
+    "Food unit is not exists": "Food unit is not exists",
+    "Please enter food amount": "Please enter food amount",
+    "Food amount must be integer": "Food amount must be integer",
+    "Food amount must gether than zero": "Food amount must gether than zero"
 }

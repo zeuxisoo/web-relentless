@@ -10,7 +10,7 @@ class FoodMenuItem extends Model {
 
     use SoftDeletes, HasFactory;
 
-    protected $fillable = ['user_id', 'food_menu_id', 'food_name_id', 'food_unit_id'];
+    protected $fillable = ['user_id', 'food_menu_id', 'food_name_id', 'food_unit_id', 'quantity'];
 
     protected $hidden = [];
 

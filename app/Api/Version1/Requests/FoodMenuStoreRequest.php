@@ -27,6 +27,8 @@ class FoodMenuStoreRequest extends ApiRequest {
                 'required',
                 Rule::exists('food_units', 'id')->where('user_id', Auth::id()),
             ],
+
+            'foods.*.quantity' => 'required|integer|gt:0',
         ];
     }
 
@@ -42,6 +44,9 @@ class FoodMenuStoreRequest extends ApiRequest {
             'foods.*.food_unit_id.required' => __('Please enter food unit'),
             'foods.*.food_name_id.exists'   => __('Food name is not exists'),
             'foods.*.food_unit_id.exists'   => __('Food unit is not exists'),
+            'foods.*.quantity.required'     => __('Please enter food quantity'),
+            'foods.*.quantity.integer'      => __('Food quantity must be integer'),
+            'foods.*.quantity.gt'           => __('Food quantity must gether than zero'),
         ];
     }
 

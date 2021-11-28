@@ -33,6 +33,7 @@ class FoodMenuController extends ApiController {
                     'food_menu_id' => $foodMenu->id,
                     'food_name_id' => $food['food_name_id'],
                     'food_unit_id' => $food['food_unit_id'],
+                    'quantity'     => $food['quantity'],
                 ]);
             }
 
@@ -44,7 +45,7 @@ class FoodMenuController extends ApiController {
         return fractal($foodMenu, new FoodMenuTransformer());
     }
 
-    public function show(int $id) {
+    public function show(int $id) { // TODO
         $foodMenu = FoodMenu::find($id);
 
         return fractal($foodMenu, new FoodMenuTransformer());
