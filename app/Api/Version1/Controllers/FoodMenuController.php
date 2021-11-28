@@ -2,6 +2,7 @@
 namespace App\Api\Version1\Controllers;
 
 use App\Api\Version1\Bases\ApiController;
+use App\Api\Version1\Enums\TagCategory;
 use App\Api\Version1\Requests\FoodMenuStoreRequest;
 use App\Api\Version1\Transformers\FoodMenuTransformer;
 use App\Models\FoodMenu;
@@ -22,7 +23,7 @@ class FoodMenuController extends ApiController {
             ]);
 
             // Food menu tags
-            $foodMenu->attachTags($input['tags'], 'food');
+            $foodMenu->attachTags($input['tags'], TagCategory::Food);
 
             // Food menu items
             $foodItems = [];
