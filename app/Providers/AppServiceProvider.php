@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\UserAccessToken;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -31,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
     {
         // N+1
         Model::preventLazyLoading(app()->isProduction() === false);
+
+        // Custom polymorphic types like morphTo
+        Relation::morphMap([
+            'food_menus' => 'App\Models\FoodMenu',
+        ]);
 
         // Custom Sanctum access token model
         Sanctum::usePersonalAccessTokenModel(UserAccessToken::class);
