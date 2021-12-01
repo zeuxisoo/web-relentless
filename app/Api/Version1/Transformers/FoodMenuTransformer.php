@@ -1,6 +1,7 @@
 <?php
 namespace App\Api\Version1\Transformers;
 
+use App\Api\Version1\Enums\TagCategory;
 use App\Models\FoodMenu;
 use League\Fractal\TransformerAbstract;
 
@@ -15,7 +16,7 @@ class FoodMenuTransformer extends TransformerAbstract {
             'id'       => $foodMenu->id,
             'start_at' => $foodMenu->start_at,
             'remark'   => $foodMenu->remark,
-            'tags'     => $foodMenu->tagsWithType('food')->pluck('name'),
+            'tags'     => $foodMenu->tagsWithType(TagCategory::Food)->pluck('name'),
         ];
     }
 
