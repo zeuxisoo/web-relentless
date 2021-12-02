@@ -11,15 +11,15 @@ class FoodUnitService {
     }
 
     public function list(int $perPage = 8) {
-        return FoodUnit::where('user_id', Auth::id())->paginate($perPage);
+        return $this->userFoodUnitScope()->paginate($perPage);
     }
 
     public function find(array $data) {
-        return FoodUnit::where('user_id', Auth::id())->find($data['id']);
+        return $this->userFoodUnitScope()->find($data['id']);
     }
 
     public function update(array $data) {
-        $foodUnit = FoodUnit::where('user_id', Auth::id())->find($data['id']);
+        $foodUnit = $this->userFoodUnitScope()->find($data['id']);
 
         $foodUnit->update([
             'name' => $data['name']
@@ -29,9 +29,14 @@ class FoodUnitService {
     }
 
     public function search(string $keyword) {
-        return FoodUnit::where('user_id', Auth::id())
+        return $this->userFoodUnitScope()
             ->where('name', 'LIKE', '%'.$keyword.'%')
             ->get();
+    }
+
+    // Shared methods
+    protected function userFoodUnitScope() {
+        return FoodUnit::where('user_id', Auth::id());
     }
 
 }
