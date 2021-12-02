@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 trait GetOrInsertFoodFields {
 
-    protected static function getOrInsertFoodFields(array $foods, string $field): array {
-        // Convert name list from foods by field name
-        $names = static::getFoodFieldValues($foods, $field);
+    protected static function getOrInsertFoodFields(string $field, array $values): array {
+        $names = $values[$field];
 
         // Get the exists names by name list
         $existsNames = static::select('name')
@@ -44,18 +43,6 @@ trait GetOrInsertFoodFields {
             ->toArray();
 
         return $ids;
-    }
-
-    protected static function getFoodFieldValues(array $foods, string $field): array {
-        $names = [];
-
-        foreach($foods as $food) {
-            if (!in_array($food[$field], $names)) {
-                array_push($names, $food[$field]);
-            }
-        }
-
-        return $names;
     }
 
 }

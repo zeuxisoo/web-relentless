@@ -30,8 +30,23 @@ class FoodMenuController extends ApiController {
             $foodMenu->attachTags($input['tags'], TagCategory::Food);
 
             // Food menu items
-            $foodNameIds = FoodName::getOrInsertFoodFields($input['foods'], field: 'name');
-            $foodUnitIds = FoodUnit::getOrInsertFoodFields($input['foods'], field: 'unit');
+            $fieldValues = [
+                'name' => [],
+                'unit' => [],
+            ];
+
+            foreach($input['foods'] as $food) {
+                if (!in_array($food['name'], $fieldValues['name'])) {
+                    $fieldValues['name'][] = $food['name'];
+                }
+
+                if (!in_array($food['unit'], $fieldValues['unit'])) {
+                    $fieldValues['unit'][] = $food['unit'];
+                }
+            }
+
+            $foodNameIds = FoodName::getOrInsertFoodFields('name', $fieldValues);
+            $foodUnitIds = FoodUnit::getOrInsertFoodFields('unit', $fieldValues);
 
             $foodItems = [];
 
