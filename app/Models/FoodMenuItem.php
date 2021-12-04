@@ -14,12 +14,4 @@ class FoodMenuItem extends Model {
 
     protected $hidden = [];
 
-    public function foodName() {
-        return $this->belongsTo(FoodName::class);
-    }
-
-    public function foodUnit() {
-        return $this->belongsTo(FoodUnit::class);
-    }
-
 }

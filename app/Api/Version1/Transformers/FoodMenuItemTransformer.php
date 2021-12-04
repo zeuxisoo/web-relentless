@@ -9,8 +9,8 @@ class FoodMenuItemTransformer extends TransformerAbstract {
     public function transform(FoodMenuItem $foodMenuItem) {
         return [
             'id'       => $foodMenuItem->id,
-            'name'     => $foodMenuItem->foodName->name,
-            'unit'     => $foodMenuItem->foodUnit->name,
+            'name'     => $foodMenuItem->name,
+            'unit'     => $foodMenuItem->unit,
             'quantity' => $foodMenuItem->quantity,
         ];
     }

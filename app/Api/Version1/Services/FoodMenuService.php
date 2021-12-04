@@ -26,8 +26,8 @@ class FoodMenuService {
             // Food menu items
             $this->foodMenuItemService->insert($data['foods'], $foodMenu);
 
-            // Load the relationship first
-            $foodMenu->load('foodItems.foodName', 'foodItems.foodUnit');
+            // Load the food items relationship first after items created
+            $foodMenu->foods = $this->foodMenuItemService->getByFoodMenuId($foodMenu->id);
 
             return $foodMenu;
         });
@@ -36,9 +36,12 @@ class FoodMenuService {
     }
 
     public function find(array $data) {
-        return FoodMenu::with('foodItems.foodName', 'foodItems.foodUnit')
-            ->where('user_id', Auth::id())
-            ->find($data['id']);
+        $foodMenu      = FoodMenu::where('user_id', Auth::id())->find($data['id']);
+        $foodMenuItems = $this->foodMenuItemService->getByFoodMenuId($foodMenu->id);
+
+        $foodMenu->foods = $foodMenuItems;
+
+        return $foodMenu;
     }
 
 }
