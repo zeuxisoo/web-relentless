@@ -11,11 +11,9 @@ use App\Api\Version1\Transformers\FoodNameTransformer;
 
 class FoodNameController extends ApiController {
 
-    private FoodNameService $foodNameService;
-
-    public function __construct(FoodNameService $foodNameService) {
-        $this->foodNameService = $foodNameService;
-    }
+    public function __construct(
+        public FoodNameService $foodNameService
+    ) {}
 
     public function store(FoodNameStoreRequest $request) {
         $input    = $request->only('name');

@@ -11,11 +11,9 @@ use App\Api\Version1\Transformers\FoodUnitTransformer;
 
 class FoodUnitController extends ApiController {
 
-    private FoodUnitService $foodUnitService;
-
-    public function __construct(FoodUnitService $foodUnitService) {
-        $this->foodUnitService = $foodUnitService;
-    }
+    public function __construct(
+        public FoodUnitService $foodUnitService
+    ) {}
 
     public function store(FoodUnitStoreRequest $request) {
         $input    = $request->only('name');
