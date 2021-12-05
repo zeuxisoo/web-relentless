@@ -16,7 +16,9 @@ abstract class TestCase extends BaseTestCase
         DB::beginTransaction();
 
         Artisan::call("migrate:refresh");
-        Artisan::call('db:seed', ['--class' => 'UsersTableSeeder']);
+
+        // Disable auto seed the user because the user will be manually create by the api class
+        // Artisan::call('db:seed', ['--class' => 'UsersTableSeeder']);
     }
 
     protected function tearDown(): void {

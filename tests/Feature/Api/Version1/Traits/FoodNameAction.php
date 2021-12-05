@@ -20,4 +20,10 @@ trait FoodNameAction {
             ]);
     }
 
+    public function createFoodNames(string ...$names) {
+        foreach($names as $name) {
+            $this->createFoodName($name);
+        }
+    }
+
 }
