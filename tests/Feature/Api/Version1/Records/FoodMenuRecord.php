@@ -14,9 +14,11 @@ class FoodMenuRecord {
         $foods = $this->foods;
 
         if (is_array($foods)) {
-            $foods = collect($this->foods)
-                ->map(fn($food) => $food->toArray())
-                ->toArray();
+            $foods = [];
+
+            foreach($this->foods as $food) {
+                $foods[] = $food->toArray();
+            }
         }
 
         return [
