@@ -35,13 +35,24 @@ class FoodMenuService {
         return $foodMenu;
     }
 
+    public function list(int $perPage = 8) {
+        return $this->userFoodMenuScope()
+            ->with('foods.name', 'foods.unit', 'tags')
+            ->paginate($perPage);
+    }
+
     public function find(array $data) {
-        $foodMenu      = FoodMenu::where('user_id', Auth::id())->find($data['id']);
+        $foodMenu      = $this->userFoodMenuScope()->find($data['id']);
         $foodMenuItems = $this->foodMenuItemService->getByFoodMenuId($foodMenu->id);
 
         $foodMenu->foods = $foodMenuItems;
 
         return $foodMenu;
+    }
+
+    // Shared methods
+    protected function userFoodMenuScope() {
+        return FoodMenu::where('user_id', Auth::id());
     }
 
 }

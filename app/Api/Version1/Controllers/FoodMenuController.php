@@ -20,6 +20,12 @@ class FoodMenuController extends ApiController {
         return fractal($foodMenu, new FoodMenuTransformer());
     }
 
+    public function list() {
+        $foodMenus = $this->foodMenuService->list();
+
+        return fractal($foodMenus, new FoodMenuTransformer());
+    }
+
     public function show(FoodMenuShowRequest $request) {
         $input    = $request->only('id');
         $foodMenu = $this->foodMenuService->find($input);
