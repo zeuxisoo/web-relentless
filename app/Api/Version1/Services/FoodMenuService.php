@@ -50,6 +50,33 @@ class FoodMenuService {
         return $foodMenu;
     }
 
+    public function update(array $data) {
+        $foodMenu = $this->find($data);
+
+        // Create must keep food ids
+        $foodIds = [];
+        foreach($data['foods'] as $food) {
+            if (array_key_exists('id', $food)) {
+                array_push($foodIds, $food['id']);
+            }
+        }
+
+        // Create will remove food ids
+        $willRemoveFoodIds = [];
+        foreach($foodMenu->foods as $food) {
+            if (!in_array($food->id, $foodIds)) {
+                array_push($willRemoveFoodIds, $food->id);
+            }
+        }
+
+        // Remove food by ids
+        if (!empty($willRemoveFoodIds)) {
+            $this->foodMenuItemService->deleteByIds($willRemoveFoodIds);
+        }
+
+        // TODO: Update exists food
+    }
+
     // Shared methods
     protected function userFoodMenuScope() {
         return FoodMenu::where('user_id', Auth::id());

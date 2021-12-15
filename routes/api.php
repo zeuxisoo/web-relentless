@@ -58,6 +58,7 @@ Route::prefix("v1")->group(function() {
                 Route::post("store",    [FoodMenuController::class, 'store'])->name('api.food.menu.store');
                 Route::get("list",      [FoodMenuController::class, 'list'])->name('api.food.menu.list');
                 Route::get("show/{id}", [FoodMenuController::class, 'show'])->name('api.food.menu.show');
+                Route::post("update",   [FoodMenuController::class, 'update'])->name('api.food.menu.update');
             });
         });
     });

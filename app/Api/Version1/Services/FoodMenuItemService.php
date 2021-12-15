@@ -96,4 +96,10 @@ class FoodMenuItemService {
             ->get();
     }
 
+    public function deleteByIds(array $ids) {
+        return FoodMenuItem::where('user_id', Auth::id())
+            ->whereIn('id', $ids)
+            ->delete();
+    }
+
 }
