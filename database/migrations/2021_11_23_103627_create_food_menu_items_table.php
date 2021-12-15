@@ -21,6 +21,7 @@ class CreateFoodMenuItemsTable extends Migration
             $table->unsignedBigInteger('food_unit_id')->index();
             $table->unsignedSmallInteger('quantity');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
