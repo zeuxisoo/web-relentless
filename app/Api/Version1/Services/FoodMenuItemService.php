@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class FoodMenuItemService {
 
+    public function list(int $perPage = 8) {
+        return $this->userFoodMenuItemScope()->paginate($perPage);
+    }
+
+    public function find(array $data) {
+        return $this->userFoodMenuItemScope()->find($data['id']);
+    }
+
     public function insert(array $foods, FoodMenu $foodMenu) {
         /**
          * Group by the field value
@@ -97,9 +105,14 @@ class FoodMenuItemService {
     }
 
     public function deleteByIds(array $ids) {
-        return FoodMenuItem::where('user_id', Auth::id())
+        return $this->userFoodMenuItemScope()
             ->whereIn('id', $ids)
             ->delete();
+    }
+
+    // Shared methods
+    protected function userFoodMenuItemScope() {
+        return FoodMenuItem::where('user_id', Auth::id());
     }
 
 }
