@@ -5,6 +5,7 @@ use App\Models\FoodMenu;
 use App\Models\FoodMenuItem;
 use App\Models\FoodName;
 use App\Models\FoodUnit;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class FoodMenuItemService {
@@ -64,6 +65,7 @@ class FoodMenuItemService {
                 'food_name_id' => $foodNameIds[$food['name']],
                 'food_unit_id' => $foodUnitIds[$food['unit']],
                 'quantity'     => $food['quantity'],
+                'created_at'   => Carbon::now(),
             ]);
         }
 

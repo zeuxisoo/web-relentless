@@ -53,7 +53,7 @@ class FoodMenuService {
     }
 
     public function update(array $data) {
-        DB::transaction(function() use ($data) {
+        $foodMenu = DB::transaction(function() use ($data) {
             $foodMenu = $this->find($data);
 
             // Remove foods
@@ -140,8 +140,25 @@ class FoodMenuService {
 
             $this->foodMenuItemService->insert($willInsertFoods, $foodMenu);
 
-            // TODO: update food menu self
+            // Update food menu self
+            // -------------
+            // Unset the customize foods property before update
+            unset($foodMenu->foods);
+
+            $foodMenu->update([
+                'start_at' => $data['start_at'],
+                'remark'   => $data['remark'],
+            ]);
+
+            $foodMenu->syncTagsWithType($data['tags'], TagCategory::Food);
+
+            // Reload the food items relationship after items removed, updated and created
+            $foodMenu->foods = $this->foodMenuItemService->getByFoodMenuId($foodMenu->id);
+
+            return $foodMenu;
         });
+
+        return $foodMenu;
     }
 
     // Shared methods
