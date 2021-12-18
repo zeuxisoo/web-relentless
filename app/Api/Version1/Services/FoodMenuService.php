@@ -56,8 +56,8 @@ class FoodMenuService {
         DB::transaction(function() use ($data) {
             $foodMenu = $this->find($data);
 
-            // Remove
-            // ------
+            // Remove foods
+            // ------------
             // Create must keep food ids
             $mustKeepFoodIds = [];
             foreach($data['foods'] as $food) {
@@ -79,8 +79,8 @@ class FoodMenuService {
                 $this->foodMenuItemService->deleteByIds($willRemoveFoodIds);
             }
 
-            // Update
-            // ------
+            // Update foods
+            // ------------
             // Group the exists foods and request foods by these food ids
             $existsFoods = [];
             foreach($foodMenu->foods as $food) {
@@ -129,7 +129,18 @@ class FoodMenuService {
                     ]);
             }
 
-            // TODO: add new foods
+            // Create foods
+            // ------------
+            $willInsertFoods = [];
+            foreach($data['foods'] as $food) {
+                if (!array_key_exists('id', $food)) {
+                    array_push($willInsertFoods, $food);
+                }
+            }
+
+            $this->foodMenuItemService->insert($willInsertFoods, $foodMenu);
+
+            // TODO: update food menu self
         });
     }
 
