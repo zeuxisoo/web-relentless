@@ -38,6 +38,8 @@ class FoodMenuUpdateRequest extends ApiRequest {
 
     public function messages() {
         return [
+            'id.required'          => __('Please enter food menu id'),
+            'id.exists'            => __('Food menu id is not exists'),
             'start_at.required'    => __('Please enter start at'),
             'start_at.date_format' => __('Invalid format of field start at'),
             'foods.required'       => __('Please enter foods'),
