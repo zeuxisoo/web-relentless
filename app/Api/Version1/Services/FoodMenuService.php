@@ -161,6 +161,11 @@ class FoodMenuService {
         return $foodMenu;
     }
 
+    public function search(string $keyword) {
+        // TODO: search by keyword in api.food.menu.search
+        return [];
+    }
+
     // Shared methods
     protected function userFoodMenuScope() {
         return FoodMenu::where('user_id', Auth::id());
