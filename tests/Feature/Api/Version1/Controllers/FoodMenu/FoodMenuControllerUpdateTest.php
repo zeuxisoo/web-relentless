@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Feature\Api\Version1\Controllers\FoodName;
+namespace Tests\Feature\Api\Version1\Controllers\FoodMenu;
 
 use App\Models\FoodMenuItem;
 use App\Models\FoodName;
