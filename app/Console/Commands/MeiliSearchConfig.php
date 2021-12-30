@@ -44,11 +44,21 @@ class MeiliSearchConfig extends Command
         // FoodMenu
         $foodMenu = new FoodMenu();
 
-        $client
-            ->index($foodMenu->searchableAs())
-            ->updateFilterableAttributes(array_merge(
-                ['id'],
+        $indexes = $client->index($foodMenu->searchableAs());
+
+        $indexes->updateSettings([
+            "filterableAttributes" => array_merge(
+                ['id', 'tags'],
                 $foodMenu->getFillable()
-            ));
+            ),
+            "rankingRules" => [
+                "exactness",
+                "proximity",
+                "words",
+                "typo",
+                "attribute",
+                "sort",
+            ],
+        ]);
     }
 }
