@@ -7,6 +7,7 @@ use App\Models\FoodName;
 use App\Models\FoodUnit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use MeiliSearch\Endpoints\Indexes;
 
 class FoodMenuService {
 
@@ -162,8 +163,11 @@ class FoodMenuService {
     }
 
     public function search(string $keyword) {
-        // TODO: search by keyword in api.food.menu.search
-        return [];
+        $foodMenus = FoodMenu::search($keyword)->where('user_id', Auth::id())->get();
+
+        $foodMenus->load('foods.name', 'foods.unit', 'tags');
+
+        return $foodMenus;
     }
 
     // Shared methods

@@ -46,3 +46,6 @@ icons:
 	done
 
 	@echo "\nOK!\n"
+
+meilisearch:
+	meilisearch --db-path=./storage/default.ms --env=development --http-addr=127.0.0.1:7700 --master-key=masterKey

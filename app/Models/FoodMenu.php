@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Api\Version1\Services\FoodMenuItemService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -39,11 +38,11 @@ class FoodMenu extends Model {
     public function toSearchableArray() {
         $foodMenu = $this->toArray();
 
-        $foodMenu['foods'] = (new FoodMenuItemService())
-            ->getByFoodMenuId($this->id)
-            ->toArray();
-
         return $foodMenu;
+    }
+
+    protected function makeAllSearchableUsing($query) {
+        return $query->with('foods.name', 'foods.unit', 'tags');
     }
 
 }
