@@ -47,18 +47,29 @@ class MeiliSearchConfig extends Command
         $indexes = $client->index($foodMenu->searchableAs());
 
         $indexes->updateSettings([
+            "distinctAttribute" => "id",
             "filterableAttributes" => array_merge(
-                ['id', 'tags'],
+                ['id', 'tags', 'foods'],
                 $foodMenu->getFillable()
             ),
             "rankingRules" => [
-                "exactness",
-                "proximity",
+                // "exactness",
+                // "proximity",
+                // "words",
+                // "typo",
+                // "attribute",
+                // "sort",
                 "words",
                 "typo",
+                "proximity",
                 "attribute",
                 "sort",
+                "exactness",
+                "start_at:desc",
             ],
+            "sortableAttributes" => [
+                "start_at",
+            ]
         ]);
     }
 }
