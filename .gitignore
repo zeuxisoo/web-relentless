@@ -19,6 +19,9 @@ yarn-error.log
 /public/assets/css
 /public/assets/workbox
 /storage/default.ms
+/scripts/venv
 composer.phar
 *.sqlite
 *.db
+*.index
+dict.*.txt

@@ -38,6 +38,26 @@ class FoodMenu extends Model {
     public function toSearchableArray() {
         $foodMenu = $this->toArray();
 
+        if (array_key_exists('tags', $foodMenu)) {
+            $foodMenu['tags'] = collect($foodMenu['tags'])
+                ->pluck('name.'.env('TAG_DEFAULT_LOCALE', 'en'))
+                ->implode(',');
+        }
+
+        if (array_key_exists('foods', $foodMenu)) {
+            $foods = [];
+
+            foreach($foodMenu['foods'] as $food) {
+                $foodName     = $food['name']['name'];
+                $foodUnit     = $food['unit']['name'];
+                $foodQuantity = $food['quantity'];
+
+                $foods[] = "{$foodName} {$foodQuantity} {$foodUnit}";
+            }
+
+            $foodMenu['foods'] = implode("|", $foods);
+        }
+
         return $foodMenu;
     }
 
