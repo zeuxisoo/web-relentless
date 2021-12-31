@@ -53,12 +53,6 @@ class MeiliSearchConfig extends Command
                 $foodMenu->getFillable()
             ),
             "rankingRules" => [
-                // "exactness",
-                // "proximity",
-                // "words",
-                // "typo",
-                // "attribute",
-                // "sort",
                 "words",
                 "typo",
                 "proximity",
