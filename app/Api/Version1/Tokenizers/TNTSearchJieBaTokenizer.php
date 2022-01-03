@@ -12,9 +12,9 @@ class TNTSearchJieBaTokenizer extends AbstractTokenizer implements TokenizerInte
         ini_set('memory_limit', '1024M');
 
         Jieba::init([
-            // 'mode' => 'default',
+            'mode' => 'default',
             'dict' => 'big',
-            // 'cjk'  => 'all',
+            'cjk'  => 'all',
         ]);
 
         Jieba::loadUserDict(storage_path().'/dict.big.cantonese.txt');
@@ -23,7 +23,7 @@ class TNTSearchJieBaTokenizer extends AbstractTokenizer implements TokenizerInte
 
         $tokens = Jieba::cut($text, true);
         $tokens = array_filter($tokens, 'trim');
-dd($tokens);
+
         return array_diff($tokens, $stopwords);
     }
 
