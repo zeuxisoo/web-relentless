@@ -163,9 +163,49 @@ class FoodMenuService {
     }
 
     public function search(string $keyword) {
-        $foodMenus = FoodMenu::search($keyword)->where('user_id', Auth::id())->get();
+        $foodMenus = [];
 
-        $foodMenus->load('foods.name', 'foods.unit', 'tags');
+        if (env('ENABLE_SCOUT', false)) {
+            $foodMenus = FoodMenu::search($keyword)->where('user_id', Auth::id())->get();
+
+            $foodMenus->load('foods.name', 'foods.unit', 'tags');
+        }else{
+            $results = DB::select(<<<END
+                SELECT
+                    id,
+                    start_at,
+                    remark,
+                    (
+                        SELECT GROUP_CONCAT(JSON_EXTRACT(tags.name, '$.zh_HK'), ',') AS tag_list
+                        FROM taggables
+                        LEFT JOIN tags
+                            ON taggables.tag_id = tags.id
+                        WHERE
+                            taggables.taggable_id = food_menus.id AND
+                            taggables.taggable_type = 'food_menus'
+                    ) AS tag_list,
+                    (
+                        SELECT
+                            GROUP_CONCAT(food_names.name || " " || food_menu_items.quantity || " " || food_units.name, ',') AS food_list
+                        FROM food_menu_items
+                        LEFT JOIN food_names
+                            ON food_menu_items.food_name_id = food_names.id
+                        LEFT JOIN food_units
+                            ON food_menu_items.food_unit_id = food_units.id
+                        WHERE food_menu_items.food_menu_id = food_menus.id
+                    ) AS food_list
+                FROM food_menus
+                WHERE
+                    remark LIKE :keyword OR
+                    tag_list LIKE :keyword OR
+                    food_list LIKE :keyword
+            END, [
+                'keyword' => "%$keyword%",
+            ]);
+
+            $foodMenus = FoodMenu::hydrate($results);
+            $foodMenus->load('foods.name', 'foods.unit', 'tags');
+        }
 
         return $foodMenus;
     }
