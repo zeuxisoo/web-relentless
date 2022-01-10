@@ -176,7 +176,8 @@ class FoodMenuService {
                     start_at,
                     remark,
                     (
-                        SELECT GROUP_CONCAT(JSON_EXTRACT(tags.name, '$.zh_HK'), ',') AS tag_list
+                        SELECT
+                            GROUP_CONCAT(JSON_EXTRACT(tags.name, '$.zh_HK'), ',') AS tag_list
                         FROM taggables
                         LEFT JOIN tags
                             ON taggables.tag_id = tags.id
@@ -192,14 +193,19 @@ class FoodMenuService {
                             ON food_menu_items.food_name_id = food_names.id
                         LEFT JOIN food_units
                             ON food_menu_items.food_unit_id = food_units.id
-                        WHERE food_menu_items.food_menu_id = food_menus.id
+                        WHERE
+                            food_menu_items.food_menu_id = food_menus.id
                     ) AS food_list
                 FROM food_menus
                 WHERE
-                    remark LIKE :keyword OR
-                    tag_list LIKE :keyword OR
-                    food_list LIKE :keyword
+                    user_id = :user_id AND
+                    (
+                        remark LIKE :keyword OR
+                        tag_list LIKE :keyword OR
+                        food_list LIKE :keyword
+                    )
             END, [
+                'user_id' => Auth::id(),
                 'keyword' => "%$keyword%",
             ]);
 
