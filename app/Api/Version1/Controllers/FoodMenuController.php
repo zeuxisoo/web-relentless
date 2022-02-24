@@ -2,6 +2,7 @@
 namespace App\Api\Version1\Controllers;
 
 use App\Api\Version1\Bases\ApiController;
+use App\Api\Version1\Requests\FoodMenuNoteRequest;
 use App\Api\Version1\Requests\FoodMenuSearchRequest;
 use App\Api\Version1\Requests\FoodMenuShowRequest;
 use App\Api\Version1\Requests\FoodMenuStoreRequest;
@@ -47,6 +48,13 @@ class FoodMenuController extends ApiController {
         $foodMenus = $this->foodMenuService->search($input['keyword']);
 
         return fractal($foodMenus, new FoodMenuTransformer());
+    }
+
+    public function note(FoodMenuNoteRequest $request) {
+        $input = $request->only('text');
+
+        // TODO: parse note text to food menus array
+        return $input;
     }
 
 }

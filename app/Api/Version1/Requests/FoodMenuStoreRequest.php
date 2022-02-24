@@ -2,8 +2,6 @@
 namespace App\Api\Version1\Requests;
 
 use App\Api\Version1\Bases\ApiRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class FoodMenuStoreRequest extends ApiRequest {
 

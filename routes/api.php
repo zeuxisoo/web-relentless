@@ -60,6 +60,7 @@ Route::prefix("v1")->group(function() {
                 Route::get("show/{id}", [FoodMenuController::class, 'show'])->name('api.food.menu.show');
                 Route::post("update",   [FoodMenuController::class, 'update'])->name('api.food.menu.update');
                 Route::get("search",    [FoodMenuController::class, 'search'])->name('api.food.menu.search');
+                Route::post("note",     [FoodMenuController::class, 'note'])->name('api.food.menu.note');
             });
         });
     });
