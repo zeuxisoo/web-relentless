@@ -1,7 +1,11 @@
 <?php
 namespace App\Parsers\Food;
 
+use App\Parsers\Food\Traits\Patterns\CommonPattern;
+
 class Lexer {
+
+    use CommonPattern;
 
     protected int $contentLength;
     protected int $currentPosition;
@@ -72,14 +76,6 @@ class Lexer {
 
             $currentChar = $this->lookChar();
         }
-    }
-
-    protected function isNewline(string $char): bool {
-        return preg_match('/[\r|\n|\r\n]/', $char);
-    }
-
-    protected function isWhitespace(string $char): bool {
-        return $char === " ";
     }
 
 }
