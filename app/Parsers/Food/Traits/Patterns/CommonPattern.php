@@ -11,4 +11,8 @@ trait CommonPattern {
         return $char === " ";
     }
 
+    protected function isEndOfLine(string $char): bool {
+        return ord($char) === 0;
+    }
+
 }

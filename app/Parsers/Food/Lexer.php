@@ -31,6 +31,11 @@ class Lexer {
 
             $currentChar = $this->readChar();
 
+            if ($this->isEndOfLine($currentChar)) {
+                $tokens[] = $this->addToken(TokenKind::EOF, $currentChar);
+                continue;
+            }
+
             // TODO: convert to tokens
         }
 
@@ -76,6 +81,15 @@ class Lexer {
 
             $currentChar = $this->lookChar();
         }
+    }
+
+    public function addToken(string $kind, string $char): Token {
+        return new Token(
+            kind  : $kind,
+            value : $char,
+            line  : $this->currentLine,
+            column: $this->currentColumn,
+        );
     }
 
 }
