@@ -22,6 +22,8 @@ class Lexer {
         $currentChar = "";
 
         while($this->currentPosition < $this->contentLength) {
+            $this->skipNewline();
+
             $currentChar = $this->readChar();
 
             // TODO: convert to tokens
@@ -43,6 +45,22 @@ class Lexer {
         $this->currentPosition++;
 
         return $currentChar;
+    }
+
+    public function lookChar(): string {
+        $currentChar = mb_substr($this->content, $this->currentPosition, 1);
+
+        return $currentChar;
+    }
+
+    public function skipNewline(): void {
+        $currentChar = $this->lookChar();
+
+        while($this->isNewline($currentChar)) {
+            $this->readChar();
+
+            $currentChar = $this->lookChar();
+        }
     }
 
     protected function isNewline(string $char): bool {
