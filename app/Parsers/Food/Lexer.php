@@ -23,6 +23,7 @@ class Lexer {
 
         while($this->currentPosition < $this->contentLength) {
             $this->skipNewline();
+            $this->skipWhitespace();
 
             $currentChar = $this->readChar();
 
@@ -63,8 +64,22 @@ class Lexer {
         }
     }
 
+    public function skipWhitespace(): void {
+        $currentChar = $this->lookChar();
+
+        while($this->isWhitespace($currentChar)) {
+            $this->readChar();
+
+            $currentChar = $this->lookChar();
+        }
+    }
+
     protected function isNewline(string $char): bool {
         return preg_match('/[\r|\n|\r\n]/', $char);
+    }
+
+    protected function isWhitespace(string $char): bool {
+        return $char === " ";
     }
 
 }
