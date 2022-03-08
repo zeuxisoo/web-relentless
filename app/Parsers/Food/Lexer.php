@@ -2,10 +2,11 @@
 namespace App\Parsers\Food;
 
 use App\Parsers\Food\Traits\Patterns\CommonPattern;
+use App\Parsers\Food\Traits\Patterns\SymbolPattern;
 
 class Lexer {
 
-    use CommonPattern;
+    use CommonPattern, SymbolPattern;
 
     protected int $contentLength;
     protected int $currentPosition;
@@ -30,6 +31,11 @@ class Lexer {
             $this->skipWhitespace();
 
             $currentChar = $this->readChar();
+
+            if ($this->isSlash($currentChar) && $this->isSlash($this->lookChar())) {
+                $this->skipSingleComment();
+                continue;
+            }
 
             if ($this->isEndOfLine($currentChar)) {
                 $tokens[] = $this->addToken(TokenKind::EOF, $currentChar);
@@ -80,6 +86,14 @@ class Lexer {
             $this->readChar();
 
             $currentChar = $this->lookChar();
+        }
+    }
+
+    public function skipSingleComment(): void {
+        $this->readChar(); // eat second slash
+
+        while(!$this->isNewline($this->lookChar())) {
+            $this->readChar();
         }
     }
 
