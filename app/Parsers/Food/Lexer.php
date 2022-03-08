@@ -2,11 +2,14 @@
 namespace App\Parsers\Food;
 
 use App\Parsers\Food\Traits\Patterns\CommonPattern;
+use App\Parsers\Food\Traits\Patterns\ComposePattern;
+use App\Parsers\Food\Traits\Patterns\DateTimePattern;
+use App\Parsers\Food\Traits\Patterns\NumberPattern;
 use App\Parsers\Food\Traits\Patterns\SymbolPattern;
 
 class Lexer {
 
-    use CommonPattern, SymbolPattern;
+    use CommonPattern, SymbolPattern, NumberPattern, ComposePattern, DateTimePattern;
 
     protected int $contentLength;
     protected int $currentPosition;
@@ -35,6 +38,30 @@ class Lexer {
             if ($this->isSlash($currentChar) && $this->isSlash($this->lookChar())) {
                 $this->skipSingleComment();
                 continue;
+            }
+
+            if ($this->isDigit($currentChar)) {
+                $numberOrDateOrTime = $this->readNumberOrDateOrTime($currentChar);
+
+                if ($this->isDate($numberOrDateOrTime)) {
+                    $tokens[] = $this->addToken(TokenKind::Date, $numberOrDateOrTime);
+                    continue;
+                }
+
+                if ($this->isTime($numberOrDateOrTime)) {
+                    $tokens[] = $this->addToken(TokenKind::Time, $numberOrDateOrTime);
+                    continue;
+                }
+
+                if ($this->isInteger($numberOrDateOrTime)) {
+                    $tokens[] = $this->addToken(TokenKind::Integer, $numberOrDateOrTime);
+                    continue;
+                }
+
+                if ($this->isDouble($numberOrDateOrTime)) {
+                    $tokens[] = $this->addToken(TokenKind::Double, $numberOrDateOrTime);
+                    continue;
+                }
             }
 
             if ($this->isEndOfLine($currentChar)) {
