@@ -23,4 +23,24 @@ trait LiteralPattern {
         return $value;
     }
 
+    protected function readRemark(string $char): string {
+        $value = $char;
+
+        while(true) {
+            $currentChar = $this->lookChar();
+
+            if ($this->isNewline($currentChar) && $this->isNewline($this->lookNextChar())) {
+                break;
+            }
+
+            if (!preg_match('/^[\x{4E00}-\x{2B738}a-zA-Z0-9_\-!$%^&*()_+\-={}\[\]:",;\s]$/u', $currentChar)) {
+                break;
+            }
+
+            $value .= $this->readChar();
+        }
+
+        return rtrim($value); // remove newline/space/tab at the end of string
+    }
+
 }

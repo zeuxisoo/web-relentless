@@ -81,6 +81,23 @@ class Lexer {
                 continue;
             }
 
+            if ($this->isGreaterThan($currentChar)) {
+                $tokens[] = $this->addToken(TokenKind::GreaterThan, $currentChar);
+
+                $this->skipWhitespace();
+
+                $lookChar = $this->lookChar();
+
+                if ($this->isLiteral($lookChar)) {
+                    $currentChar = $this->readChar();
+                    $literal     = $this->readRemark($currentChar);
+
+                    $tokens[] = $this->addToken(TokenKind::Remark, $literal);
+                }
+
+                continue;
+            }
+
             if ($this->isAt($currentChar)) {
                 $tokens[] = $this->addToken(TokenKind::At, $currentChar);
                 continue;
@@ -133,6 +150,12 @@ class Lexer {
         $currentChar = mb_substr($this->content, $this->currentPosition, 1);
 
         return $currentChar;
+    }
+
+    public function lookNextChar(): string {
+        $nextChar = mb_substr($this->content, $this->currentPosition + 1, 1);
+
+        return $nextChar;
     }
 
     public function skipNewline(): void {

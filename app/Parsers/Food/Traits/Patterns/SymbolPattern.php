@@ -23,4 +23,8 @@ trait SymbolPattern {
         return $char === "}";
     }
 
+    protected function isGreaterThan(string $char): bool {
+        return $char === ">";
+    }
+
 }
