@@ -11,6 +11,7 @@ class TokenKind {
     public const Tag  = "tag";
 
     public const Sharp = "sharp";
+    public const At    = "at";
 
     public const EOF = "end_of_line";
 

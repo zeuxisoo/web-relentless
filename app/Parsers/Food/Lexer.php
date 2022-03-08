@@ -80,6 +80,11 @@ class Lexer {
                 continue;
             }
 
+            if ($this->isAt($currentChar)) {
+                $tokens[] = $this->addToken(TokenKind::At, $currentChar);
+                continue;
+            }
+
             if ($this->isEndOfLine($currentChar)) {
                 $tokens[] = $this->addToken(TokenKind::EOF, $currentChar);
                 continue;

@@ -11,4 +11,8 @@ trait SymbolPattern {
         return $char === "#";
     }
 
+    protected function isAt(string $char): bool {
+        return $char === "@";
+    }
+
 }
