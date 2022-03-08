@@ -6,10 +6,11 @@ use App\Parsers\Food\Traits\Patterns\ComposePattern;
 use App\Parsers\Food\Traits\Patterns\DateTimePattern;
 use App\Parsers\Food\Traits\Patterns\NumberPattern;
 use App\Parsers\Food\Traits\Patterns\SymbolPattern;
+use App\Parsers\Food\Traits\Patterns\TagPattern;
 
 class Lexer {
 
-    use CommonPattern, SymbolPattern, NumberPattern, ComposePattern, DateTimePattern;
+    use CommonPattern, SymbolPattern, NumberPattern, ComposePattern, DateTimePattern, TagPattern;
 
     protected int $contentLength;
     protected int $currentPosition;
@@ -62,6 +63,21 @@ class Lexer {
                     $tokens[] = $this->addToken(TokenKind::Double, $numberOrDateOrTime);
                     continue;
                 }
+            }
+
+            if ($this->isSharp($currentChar)) {
+                $tokens[] = $this->addToken(TokenKind::Sharp, $currentChar);
+
+                $lookChar = $this->lookChar();
+
+                if ($this->isTag($lookChar)) {
+                    $currentChar = $this->readChar();
+                    $literal     = $this->readTag($currentChar);
+
+                    $tokens[] = $this->addToken(TokenKind::Tag, $literal);
+                }
+
+                continue;
             }
 
             if ($this->isEndOfLine($currentChar)) {

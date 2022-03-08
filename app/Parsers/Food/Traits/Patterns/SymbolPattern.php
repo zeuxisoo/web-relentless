@@ -7,4 +7,8 @@ trait SymbolPattern {
         return $char === "/";
     }
 
+    protected function isSharp(string $char): bool {
+        return $char === "#";
+    }
+
 }

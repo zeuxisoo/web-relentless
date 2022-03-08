@@ -8,6 +8,9 @@ class TokenKind {
 
     public const Date = "date";
     public const Time = "time";
+    public const Tag  = "tag";
+
+    public const Sharp = "sharp";
 
     public const EOF = "end_of_line";
 
