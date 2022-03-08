@@ -4,13 +4,14 @@ namespace App\Parsers\Food;
 use App\Parsers\Food\Traits\Patterns\CommonPattern;
 use App\Parsers\Food\Traits\Patterns\ComposePattern;
 use App\Parsers\Food\Traits\Patterns\DateTimePattern;
+use App\Parsers\Food\Traits\Patterns\LiteralPattern;
 use App\Parsers\Food\Traits\Patterns\NumberPattern;
 use App\Parsers\Food\Traits\Patterns\SymbolPattern;
 use App\Parsers\Food\Traits\Patterns\TagPattern;
 
 class Lexer {
 
-    use CommonPattern, SymbolPattern, NumberPattern, ComposePattern, DateTimePattern, TagPattern;
+    use CommonPattern, SymbolPattern, NumberPattern, ComposePattern, DateTimePattern, TagPattern, LiteralPattern;
 
     protected int $contentLength;
     protected int $currentPosition;
@@ -92,6 +93,13 @@ class Lexer {
 
             if ($this->isRightCurlyBracket($currentChar)) {
                 $tokens[] = $this->addToken(TokenKind::RightCurlyBracket, $currentChar);
+                continue;
+            }
+
+            if ($this->isLiteral($currentChar)) {
+                $literal = $this->readString($currentChar);
+
+                $tokens[] = $this->addToken(TokenKind::String, $literal);
                 continue;
             }
 

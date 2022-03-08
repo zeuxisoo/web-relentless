@@ -5,6 +5,7 @@ class TokenKind {
 
     public const Double  = "double";
     public const Integer = "integer";
+    public const String  = "string";
 
     public const Date = "date";
     public const Time = "time";
