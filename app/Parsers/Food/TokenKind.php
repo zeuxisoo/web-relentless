@@ -13,6 +13,8 @@ class TokenKind {
     public const Sharp = "sharp";
     public const At    = "at";
 
+    public const LeftCurlyBracket  = "left_curly_bracket";
+
     public const EOF = "end_of_line";
 
 }

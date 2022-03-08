@@ -15,4 +15,8 @@ trait SymbolPattern {
         return $char === "@";
     }
 
+    protected function isLeftCurlyBracket(string $char): bool {
+        return $char === "{";
+    }
+
 }
