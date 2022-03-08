@@ -14,6 +14,7 @@ class TokenKind {
     public const At    = "at";
 
     public const LeftCurlyBracket  = "left_curly_bracket";
+    public const RightCurlyBracket = "right_curly_bracket";
 
     public const EOF = "end_of_line";
 

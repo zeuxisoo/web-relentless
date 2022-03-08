@@ -90,6 +90,11 @@ class Lexer {
                 continue;
             }
 
+            if ($this->isRightCurlyBracket($currentChar)) {
+                $tokens[] = $this->addToken(TokenKind::RightCurlyBracket, $currentChar);
+                continue;
+            }
+
             if ($this->isEndOfLine($currentChar)) {
                 $tokens[] = $this->addToken(TokenKind::EOF, $currentChar);
                 continue;

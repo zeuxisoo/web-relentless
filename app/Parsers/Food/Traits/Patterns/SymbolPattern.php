@@ -19,4 +19,8 @@ trait SymbolPattern {
         return $char === "{";
     }
 
+    protected function isRightCurlyBracket(string $char): bool {
+        return $char === "}";
+    }
+
 }
