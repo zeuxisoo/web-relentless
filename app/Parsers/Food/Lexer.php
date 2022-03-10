@@ -1,6 +1,7 @@
 <?php
 namespace App\Parsers\Food;
 
+use App\Parsers\Food\Exceptions\LexerException;
 use App\Parsers\Food\Traits\Patterns\CommonPattern;
 use App\Parsers\Food\Traits\Patterns\ComposePattern;
 use App\Parsers\Food\Traits\Patterns\DateTimePattern;
@@ -32,8 +33,7 @@ class Lexer {
         $currentChar = "";
 
         while($this->currentPosition < $this->contentLength) {
-            $this->skipNewline();
-            $this->skipWhitespace();
+            $this->skipNewlineOrWhiteSpace();
 
             $currentChar = $this->readChar();
 
@@ -125,7 +125,7 @@ class Lexer {
                 continue;
             }
 
-            // TODO: convert to tokens
+            $this->stopLexer($currentChar);
         }
 
         return $tokens;
@@ -158,10 +158,10 @@ class Lexer {
         return $nextChar;
     }
 
-    public function skipNewline(): void {
+    public function skipNewlineOrWhiteSpace(): void {
         $currentChar = $this->lookChar();
 
-        while($this->isNewline($currentChar)) {
+        while($this->isNewline($currentChar) || $this->isWhiteSpace($currentChar)) {
             $this->readChar();
 
             $currentChar = $this->lookChar();
@@ -183,6 +183,10 @@ class Lexer {
 
         while(!$this->isNewline($this->lookChar())) {
             $this->readChar();
+
+            if ($this->currentPosition >= $this->contentLength) {
+                break;
+            }
         }
     }
 
@@ -192,6 +196,14 @@ class Lexer {
             value : $char,
             line  : $this->currentLine,
             column: $this->currentColumn,
+        );
+    }
+
+    public function stopLexer(string $char): never {
+        throw new LexerException(
+            $char,
+            $this->currentLine,
+            $this->currentColumn,
         );
     }
 
