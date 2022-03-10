@@ -58,6 +58,8 @@ class FoodMenuController extends ApiController {
         $lexer  = new Lexer($input['text']);
         $parser = new Parser($lexer);
 
+        $parser->parse();
+
         // TODO: parse note text to food menus array
         return $input;
     }
