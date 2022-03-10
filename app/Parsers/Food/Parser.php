@@ -1,7 +1,9 @@
 <?php
 namespace App\Parsers\Food;
 
+use App\Parsers\Food\Ast\Contracts\Statement;
 use App\Parsers\Food\Ast\Program;
+use App\Parsers\Food\Ast\Statements\ExpressionStatement;
 
 class Parser {
 
@@ -27,8 +29,12 @@ class Parser {
         while ($currentToken !== null) {
 
             switch($currentToken->kind) {
-                // TODO: parse each token
                 default:
+                    $statement = $this->parseExpressionStatement($currentToken);
+
+                    if ($statement !== null) {
+                        $statements[] = $statement;
+                    }
                     break;
             }
 
@@ -36,6 +42,18 @@ class Parser {
         }
 
         return $statements;
+    }
+
+    protected function parseExpressionStatement(Token $token): ?Statement {
+        $expression = null;
+
+        switch($token->kind) {
+            case TokenKind::EOF:
+                // Nothing todo
+                break;
+        }
+
+        return $expression !== null ? new ExpressionStatement($expression) : $expression;
     }
 
     protected function readToken(): ?Token {
