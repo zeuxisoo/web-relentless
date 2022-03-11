@@ -2,6 +2,8 @@
 namespace App\Parsers\Food\Traits\Parsers;
 
 use App\Parsers\Food\Ast\Contracts\DateStatement;
+use App\Parsers\Food\Ast\Expressions\DateGroupMemberExpression;
+use App\Parsers\Food\Ast\Expressions\DateGroupMembersExpression;
 use App\Parsers\Food\Ast\Statements\DateGroupStatement;
 use App\Parsers\Food\Ast\Statements\DateSingleStatement;
 use App\Parsers\Food\Token;
@@ -40,8 +42,26 @@ trait DateParser {
     }
 
     protected function parseDateGroupStatement(Token $token): DateGroupStatement {
-        // TODO: Implement parseDateGroupStatement() method.
-        return new DateGroupStatement();
+        return new DateGroupStatement(
+            value  : $token->value,
+            members: new DateGroupMembersExpression($this->parseDateGroupMembersExpression())
+        );
+    }
+
+    protected function parseDateGroupMembersExpression(): array {
+        $rows = [];
+
+        while(true) {
+            // TODO: parse related date member into expression
+            $rows[] = new DateGroupMemberExpression();
+
+            if ($this->lookToken()->kind === TokenKind::RightCurlyBracket) {
+                $this->readToken(); // eat the right curly bracket first
+                break;
+            }
+        }
+
+        return $rows;
     }
 
 }
