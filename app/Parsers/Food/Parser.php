@@ -4,15 +4,21 @@ namespace App\Parsers\Food;
 use App\Parsers\Food\Ast\Contracts\Statement;
 use App\Parsers\Food\Ast\Program;
 use App\Parsers\Food\Ast\Statements\ExpressionStatement;
+use App\Parsers\Food\Exceptions\ParserException;
+use App\Parsers\Food\Traits\Parsers\DateParser;
 
 class Parser {
 
-    protected array $tokens;
+    use DateParser;
+
+    protected array $tokens = [];
+    protected ?Validator $validator = null;
 
     public function __construct(
         public Lexer $lexer
     ) {
-        $this->tokens = $lexer->lex();
+        $this->tokens    = $lexer->lex();
+        $this->validator = new Validator();
     }
 
     public function parse(): Program {
@@ -29,6 +35,9 @@ class Parser {
         while ($currentToken !== null) {
 
             switch($currentToken->kind) {
+                case TokenKind::Date:
+                    $statements[] = $this->parseDateStatement($currentToken);
+                    break;
                 default:
                     $statement = $this->parseExpressionStatement($currentToken);
 
@@ -58,6 +67,14 @@ class Parser {
 
     protected function readToken(): ?Token {
         return array_shift($this->tokens);
+    }
+
+    protected function lookToken(): ?Token {
+        return reset($this->tokens);
+    }
+
+    protected function stopParser(string $message, Token $token): never {
+        throw new ParserException($message, $token);
     }
 
 }
