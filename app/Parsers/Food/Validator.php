@@ -9,4 +9,8 @@ class Validator {
         return DateTime::createFromFormat("Y-m-d", $date)->format("Y-m-d") === $date;
     }
 
+    public function isTime(string $time): bool {
+        return DateTime::createFromFormat("H:i", $time)->format("H:i") === $time;
+    }
+
 }

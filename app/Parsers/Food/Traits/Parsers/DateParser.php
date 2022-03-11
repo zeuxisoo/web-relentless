@@ -9,6 +9,8 @@ use App\Parsers\Food\TokenKind;
 
 trait DateParser {
 
+    use TimeParser;
+
     protected function parseDateStatement(Token $token): DateStatement {
         if (!$this->validator->isDate($token->value)) {
             $this->stopParser("Invalid date string", $token);
@@ -28,8 +30,10 @@ trait DateParser {
     }
 
     protected function parseDateSingleStatement(Token $token): DateSingleStatement {
-        // TODO: Implement parseDateSingleStatement() method.
-        return new DateSingleStatement();
+        return new DateSingleStatement(
+            value : $token->value,
+            time  : $this->parseTimeExpression(),
+        );
     }
 
     protected function parseDateGroupStatement(Token $token): DateGroupStatement {
