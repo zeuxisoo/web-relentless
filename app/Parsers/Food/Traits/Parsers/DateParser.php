@@ -9,7 +9,7 @@ use App\Parsers\Food\TokenKind;
 
 trait DateParser {
 
-    use TimeParser, TagsParser;
+    use TimeParser, TagsParser, FoodsParser;
 
     protected function parseDateStatement(Token $token): DateStatement {
         if (!$this->validator->isDate($token->value)) {
@@ -34,6 +34,7 @@ trait DateParser {
             value : $token->value,
             time  : $this->parseTimeExpression(),
             tags  : $this->parseTagsExpression(),
+            foods : $this->parseFoodsExpression(),
         );
     }
 
