@@ -52,8 +52,12 @@ trait DateParser {
         $rows = [];
 
         while(true) {
-            // TODO: parse related date member into expression
-            $rows[] = new DateGroupMemberExpression();
+            $rows[] = new DateGroupMemberExpression(
+                time  : $this->parseTimeExpression(),
+                tags  : $this->parseTagsExpression(),
+                foods : $this->parseFoodsExpression(),
+                remark: $this->parseRemarkExpression(),
+            );
 
             if ($this->lookToken()->kind === TokenKind::RightCurlyBracket) {
                 $this->readToken(); // eat the right curly bracket first
