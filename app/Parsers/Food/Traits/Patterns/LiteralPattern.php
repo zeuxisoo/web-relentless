@@ -29,7 +29,10 @@ trait LiteralPattern {
         while(true) {
             $currentChar = $this->lookChar();
 
-            if ($this->isNewline($currentChar) && $this->isNewline($this->lookNextChar())) {
+            $isDoubleNewline     = $this->isNewline($currentChar) && $this->isNewline($this->lookNextChar());
+            $isRightCurlyBracket = $this->isRightCurlyBracket($currentChar);
+
+            if ($isDoubleNewline || $isRightCurlyBracket) {
                 break;
             }
 
