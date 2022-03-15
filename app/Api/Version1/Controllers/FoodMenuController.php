@@ -11,6 +11,7 @@ use App\Api\Version1\Services\FoodMenuService;
 use App\Api\Version1\Transformers\FoodMenuTransformer;
 use App\Parsers\Food\Lexer;
 use App\Parsers\Food\Parser;
+use App\Parsers\Food\Traverser;
 
 class FoodMenuController extends ApiController {
 
@@ -55,10 +56,11 @@ class FoodMenuController extends ApiController {
     public function note(FoodMenuNoteRequest $request) {
         $input = $request->only('text');
 
-        $lexer  = new Lexer($input['text']);
-        $parser = new Parser($lexer);
+        $lexer     = new Lexer($input['text']);
+        $parser    = new Parser($lexer);
+        $traverser = new Traverser($parser);
 
-        $parser->parse();
+        $traverser->traverse();
 
         // TODO: parse note text to food menus array
         return $input;
