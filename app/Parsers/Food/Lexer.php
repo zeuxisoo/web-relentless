@@ -199,7 +199,7 @@ class Lexer {
         );
     }
 
-    public function stopLexer(string $char): never {
+    protected function stopLexer(string $char): never {
         throw new LexerException(
             $char,
             $this->currentLine,
