@@ -3,12 +3,14 @@ namespace App\Parsers\Food;
 
 use App\Parsers\Food\Ast\Contracts\Node;
 use App\Parsers\Food\Ast\Program;
+use App\Parsers\Food\Ast\Statements\DateSingleStatement;
 use App\Parsers\Food\Exceptions\GeneratorException;
+use App\Parsers\Food\Traits\Producers\DateProducer;
 use App\Parsers\Food\Traits\Producers\ProgramProducer;
 
 class Generator {
 
-    use ProgramProducer;
+    use ProgramProducer, DateProducer;
 
     protected Program $program;
 
@@ -28,6 +30,10 @@ class Generator {
         switch($className) {
             case Program::class:
                 return $this->produceProgram($node);
+                break;
+            // Statements
+            case DateSingleStatement::class:
+                return $this->produceDateSingleStatement($node);
                 break;
             default:
                 $this->stopGenerator($node);

@@ -6,13 +6,13 @@ use App\Parsers\Food\Ast\Program;
 trait ProgramProducer {
 
     protected function produceProgram(Program $program): array {
-        $statements = [];
+        $codes = [];
 
         foreach($program->statements as $statement) {
-            // TODO: produce each statement
+            return $this->produce($statement);
         }
 
-        return $statements;
+        return $codes;
     }
 
 }
