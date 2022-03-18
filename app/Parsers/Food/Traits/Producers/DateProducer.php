@@ -8,7 +8,7 @@ trait DateProducer {
     protected function produceDateSingleStatement(DateSingleStatement $node): array {
         return [
             'date'   => $node->value,
-            'time'   => '',
+            'time'   => $this->produce($node->time),
             'tags'   => [],
             'foods'  => [],
             'remark' => '',
