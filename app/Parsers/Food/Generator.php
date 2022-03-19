@@ -3,6 +3,8 @@ namespace App\Parsers\Food;
 
 use App\Parsers\Food\Ast\Contracts\Node;
 use App\Parsers\Food\Ast\Expressions\{
+    FoodExpression,
+    FoodsExpression,
     TagExpression,
     TagsExpression,
     TimeExpression,
@@ -16,12 +18,16 @@ use App\Parsers\Food\Traits\Producers\{
     TagProducer,
     TagsProducer,
     TimeProducer,
+    FoodsProducer,
+    FoodProducer,
 };
 
 class Generator {
 
     use ProgramProducer;
-    use DateProducer, TimeProducer, TagsProducer, TagProducer;
+    use DateProducer, TimeProducer;
+    use TagsProducer, TagProducer;
+    use FoodsProducer, FoodProducer;
 
     protected Program $program;
 
@@ -55,6 +61,12 @@ class Generator {
                 break;
             case TagExpression::class:
                 return $this->produceTagExpression($node);
+                break;
+            case FoodsExpression::class:
+                return $this->produceFoodsExpression($node);
+                break;
+            case FoodExpression::class:
+                return $this->produceFoodExpression($node);
                 break;
             default:
                 $this->stopGenerator($node);

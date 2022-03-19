@@ -10,7 +10,7 @@ trait DateProducer {
             'date'   => $node->value,
             'time'   => $this->produce($node->time),
             'tags'   => $this->produce($node->tags),
-            'foods'  => [],
+            'foods'  => $this->produce($node->foods),
             'remark' => '',
         ];
     }
