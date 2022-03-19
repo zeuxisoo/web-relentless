@@ -11,7 +11,7 @@ trait DateProducer {
             'time'   => $this->produce($node->time),
             'tags'   => $this->produce($node->tags),
             'foods'  => $this->produce($node->foods),
-            'remark' => '',
+            'remark' => $this->produce($node->remark),
         ];
     }
 
