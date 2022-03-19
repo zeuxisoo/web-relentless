@@ -9,7 +9,7 @@ trait ProgramProducer {
         $codes = [];
 
         foreach($program->statements as $statement) {
-            return $this->produce($statement);
+            $codes[] = $this->produce($statement);
         }
 
         return $codes;
