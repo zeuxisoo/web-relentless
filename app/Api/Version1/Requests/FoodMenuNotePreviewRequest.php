@@ -3,7 +3,7 @@ namespace App\Api\Version1\Requests;
 
 use App\Api\Version1\Bases\ApiRequest;
 
-class FoodMenuNoteRequest extends ApiRequest {
+class FoodMenuNotePreviewRequest extends ApiRequest {
 
     public function authorize() {
         return true;

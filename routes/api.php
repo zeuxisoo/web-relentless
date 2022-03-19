@@ -2,6 +2,7 @@
 
 use App\Api\Version1\Controllers\AuthController;
 use App\Api\Version1\Controllers\FoodMenuController;
+use App\Api\Version1\Controllers\FoodMenuNoteController;
 use App\Api\Version1\Controllers\FoodNameController;
 use App\Api\Version1\Controllers\FoodUnitController;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +61,10 @@ Route::prefix("v1")->group(function() {
                 Route::get("show/{id}", [FoodMenuController::class, 'show'])->name('api.food.menu.show');
                 Route::post("update",   [FoodMenuController::class, 'update'])->name('api.food.menu.update');
                 Route::get("search",    [FoodMenuController::class, 'search'])->name('api.food.menu.search');
-                Route::post("note",     [FoodMenuController::class, 'note'])->name('api.food.menu.note');
+
+                Route::prefix("note")->group(function() {
+                    Route::post("preview", [FoodMenuNoteController::class, 'preview'])->name('api.food.menu.note.preview');
+                });
             });
         });
     });

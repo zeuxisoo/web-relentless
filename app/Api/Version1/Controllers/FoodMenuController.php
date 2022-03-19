@@ -2,17 +2,12 @@
 namespace App\Api\Version1\Controllers;
 
 use App\Api\Version1\Bases\ApiController;
-use App\Api\Version1\Requests\FoodMenuNoteRequest;
 use App\Api\Version1\Requests\FoodMenuSearchRequest;
 use App\Api\Version1\Requests\FoodMenuShowRequest;
 use App\Api\Version1\Requests\FoodMenuStoreRequest;
 use App\Api\Version1\Requests\FoodMenuUpdateRequest;
 use App\Api\Version1\Services\FoodMenuService;
 use App\Api\Version1\Transformers\FoodMenuTransformer;
-use App\Parsers\Food\Generator;
-use App\Parsers\Food\Lexer;
-use App\Parsers\Food\Parser;
-use App\Parsers\Food\Traverser;
 
 class FoodMenuController extends ApiController {
 
@@ -52,20 +47,6 @@ class FoodMenuController extends ApiController {
         $foodMenus = $this->foodMenuService->search($input['keyword']);
 
         return fractal($foodMenus, new FoodMenuTransformer());
-    }
-
-    public function note(FoodMenuNoteRequest $request) {
-        $input = $request->only('text');
-
-        $lexer     = new Lexer($input['text']);
-        $parser    = new Parser($lexer);
-        $traverser = new Traverser($parser);
-        $generator = new Generator($traverser);
-
-        $generator->generate();
-
-        // TODO: parse note text to food menus array
-        return $input;
     }
 
 }
