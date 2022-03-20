@@ -2,6 +2,7 @@
 namespace App\Api\Version1\Requests;
 
 use App\Api\Version1\Bases\ApiRequest;
+use App\Api\Version1\Rules\FoodParsed;
 
 class FoodMenuNotePreviewRequest extends ApiRequest {
 
@@ -11,7 +12,7 @@ class FoodMenuNotePreviewRequest extends ApiRequest {
 
     public function rules() {
         return [
-            'text' => ['required'],
+            'text' => ['required', new FoodParsed()],
         ];
     }
 
