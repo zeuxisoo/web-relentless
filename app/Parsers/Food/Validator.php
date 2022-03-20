@@ -6,11 +6,23 @@ use DateTime;
 class Validator {
 
     public function isDate(string $date): bool {
-        return DateTime::createFromFormat("Y-m-d", $date)->format("Y-m-d") === $date;
+        $datetime = DateTime::createFromFormat("Y-m-d", $date);
+
+        if ($datetime !== false) {
+            return $datetime->format("Y-m-d") === $date;
+        }
+
+        return false;
     }
 
     public function isTime(string $time): bool {
-        return DateTime::createFromFormat("H:i", $time)->format("H:i") === $time;
+        $datetime = DateTime::createFromFormat("H:i", $time);
+
+        if ($datetime !== false) {
+            return $datetime->format("H:i") === $time;
+        }
+
+        return false;
     }
 
 }
