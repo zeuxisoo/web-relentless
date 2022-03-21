@@ -47,37 +47,22 @@ class Generator {
     protected function produce(Node $node): array|string {
         $className = get_class($node);
 
-        switch($className) {
-            case Program::class:
-                return $this->produceProgram($node);
-                break;
+        return match($className) {
+            Program::class => $this->produceProgram($node),
+
             // Statements
-            case DateSingleStatement::class:
-                return $this->produceDateSingleStatement($node);
-                break;
+            DateSingleStatement::class => $this->produceDateSingleStatement($node),
+
             // Expressions
-            case TimeExpression::class:
-                return $this->produceTimeExpression($node);
-                break;
-            case TagsExpression::class:
-                return $this->produceTagsExpression($node);
-                break;
-            case TagExpression::class:
-                return $this->produceTagExpression($node);
-                break;
-            case FoodsExpression::class:
-                return $this->produceFoodsExpression($node);
-                break;
-            case FoodExpression::class:
-                return $this->produceFoodExpression($node);
-                break;
-            case RemarkExpression::class:
-                return $this->produceRemarkExpression($node);
-                break;
-            default:
-                $this->stopGenerator($node);
-                break;
-        }
+            TimeExpression::class => $this->produceTimeExpression($node),
+            TagsExpression::class => $this->produceTagsExpression($node),
+            TagExpression::class => $this->produceTagExpression($node),
+            FoodsExpression::class => $this->produceFoodsExpression($node),
+            FoodExpression::class => $this->produceFoodExpression($node),
+            RemarkExpression::class => $this->produceRemarkExpression($node),
+
+            default => $this->stopGenerator($node),
+        };
     }
 
     public function stopGenerator(Node $node): never {
