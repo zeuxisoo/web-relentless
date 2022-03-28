@@ -120,12 +120,22 @@ class Lexer {
                 continue;
             }
 
+            // When parsing file
             if ($this->isEndOfLine($currentChar)) {
                 $tokens[] = $this->addToken(TokenKind::EOF, $currentChar);
                 continue;
             }
 
             $this->stopLexer($currentChar);
+        }
+
+        // When parsing text
+        $endOfFileToken = array_filter($tokens, function($token) {
+            return $token->kind === TokenKind::EOF;
+        });
+
+        if (empty($endOfFileToken)) {
+            $tokens[] = $this->addToken(TokenKind::EOF, "end_of_file");
         }
 
         return $tokens;

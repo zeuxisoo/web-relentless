@@ -69,7 +69,7 @@ class Parser {
         return array_shift($this->tokens);
     }
 
-    protected function lookToken(): ?Token {
+    protected function lookToken(): Token {
         return reset($this->tokens);
     }
 
