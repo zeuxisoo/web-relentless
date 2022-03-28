@@ -20,6 +20,9 @@ class FoodMenuControllerSharedTest extends ApiControllerTestCase {
 
         $response = $this->get('/api/v1/food/menu/search');
         $response->assertStatus(401);
+
+        $response = $this->post('/api/v1/food/menu/note/preview');
+        $response->assertStatus(401);
     }
 
 }
