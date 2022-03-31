@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class FoodMenuItemTransformer extends TransformerAbstract {
 
-    public function transform(FoodMenuItem $foodMenuItem) {
+    public function transform(FoodMenuItem $foodMenuItem): array {
         return [
             'id'       => $foodMenuItem->id,
             'name'     => $foodMenuItem->name->name ?? $foodMenuItem->name, // From model relation or left join

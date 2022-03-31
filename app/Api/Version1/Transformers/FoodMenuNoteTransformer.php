@@ -5,7 +5,7 @@ use League\Fractal\TransformerAbstract;
 
 class FoodMenuNoteTransformer extends TransformerAbstract {
 
-    public function transform(array $note) {
+    public function transform(array $note): array {
         return [
             'date'   => $note['date'],
             'time'   => $note['time'],

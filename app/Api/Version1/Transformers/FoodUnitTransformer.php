@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class FoodUnitTransformer extends TransformerAbstract {
 
-    public function transform(FoodUnit $foodUnit) {
+    public function transform(FoodUnit $foodUnit): array {
         return [
             'id'   => $foodUnit->id,
             'name' => $foodUnit->name,
