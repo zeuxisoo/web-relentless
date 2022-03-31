@@ -7,15 +7,15 @@ use Illuminate\Validation\Rule;
 
 class FoodNameShowRequest extends ApiRequest {
 
-    public function authorize() {
+    public function authorize(): bool {
         return true;
     }
 
-    public function all($keys = null) {
+    public function all($keys = null): array {
         return array_merge(parent::all(), $this->route()->parameters());
     }
 
-    public function rules() {
+    public function rules(): array {
         return [
             'id'   => [
                 'required',
@@ -24,7 +24,7 @@ class FoodNameShowRequest extends ApiRequest {
         ];
     }
 
-    public function messages() {
+    public function messages(): array {
         return [
             'id.required'   => __("Please enter food name id"),
             'id.exists'     => __("Food name id is not exists"),

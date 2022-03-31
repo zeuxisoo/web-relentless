@@ -7,11 +7,11 @@ use Illuminate\Validation\Rule;
 
 class FoodMenuUpdateRequest extends ApiRequest {
 
-    public function authorize() {
+    public function authorize(): bool {
         return true;
     }
 
-    public function rules() {
+    public function rules(): array {
         return [
             'id' => [
                 'required',
@@ -36,7 +36,7 @@ class FoodMenuUpdateRequest extends ApiRequest {
         ];
     }
 
-    public function messages() {
+    public function messages(): array {
         return [
             'id.required'          => __('Please enter food menu id'),
             'id.exists'            => __('Food menu id is not exists'),

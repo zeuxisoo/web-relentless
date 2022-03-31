@@ -5,11 +5,11 @@ use App\Api\Version1\Bases\ApiRequest;
 
 class FoodMenuStoreRequest extends ApiRequest {
 
-    public function authorize() {
+    public function authorize(): bool {
         return true;
     }
 
-    public function rules() {
+    public function rules(): array {
         return [
             'start_at' => 'required|date_format:"Y-m-d H:i:s"',
             'foods'    => 'required|array',
@@ -22,7 +22,7 @@ class FoodMenuStoreRequest extends ApiRequest {
         ];
     }
 
-    public function messages() {
+    public function messages(): array {
         return [
             'start_at.required'    => __('Please enter start at'),
             'start_at.date_format' => __('Invalid format of field start at'),
