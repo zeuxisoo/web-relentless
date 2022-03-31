@@ -7,6 +7,7 @@ use App\Api\Version1\Requests\FoodMenuShowRequest;
 use App\Api\Version1\Requests\FoodMenuStoreRequest;
 use App\Api\Version1\Requests\FoodMenuUpdateRequest;
 use App\Api\Version1\Services\FoodMenuService;
+use App\Api\Version1\Supports\Fractal;
 use App\Api\Version1\Transformers\FoodMenuTransformer;
 
 class FoodMenuController extends ApiController {
@@ -15,7 +16,7 @@ class FoodMenuController extends ApiController {
         public FoodMenuService $foodMenuService
     ) {}
 
-    public function store(FoodMenuStoreRequest $request) {
+    public function store(FoodMenuStoreRequest $request): Fractal {
         $input    = $request->only('start_at', 'foods', 'tags', 'remark');
         $foodMenu = $this->foodMenuService->create($input);
 
@@ -28,21 +29,21 @@ class FoodMenuController extends ApiController {
         return fractal($foodMenus, new FoodMenuTransformer());
     }
 
-    public function show(FoodMenuShowRequest $request) {
+    public function show(FoodMenuShowRequest $request): Fractal {
         $input    = $request->only('id');
         $foodMenu = $this->foodMenuService->find($input);
 
         return fractal($foodMenu, new FoodMenuTransformer());
     }
 
-    public function update(FoodMenuUpdateRequest $request) {
+    public function update(FoodMenuUpdateRequest $request): Fractal {
         $input    = $request->only('id', 'start_at', 'foods', 'tags', 'remark');
         $foodMenu = $this->foodMenuService->update($input);
 
         return fractal($foodMenu, new FoodMenuTransformer());
     }
 
-    public function search(FoodMenuSearchRequest $request) {
+    public function search(FoodMenuSearchRequest $request): Fractal {
         $input     = $request->only('keyword');
         $foodMenus = $this->foodMenuService->search($input['keyword']);
 

@@ -12,6 +12,7 @@ use App\Parsers\Food\Exceptions\LexerException;
 use App\Parsers\Food\Exceptions\ParserException;
 use App\Parsers\Food\Helper as FoodParserHelper;
 use Illuminate\Http\JsonResponse;
+use Spatie\Fractal\Fractal;
 
 class FoodMenuNoteController extends ApiController {
 
@@ -19,7 +20,7 @@ class FoodMenuNoteController extends ApiController {
         public FoodMenuNoteService $foodMenuNoteService,
     ) {}
 
-    public function preview(FoodMenuNotePreviewRequest $request) {
+    public function preview(FoodMenuNotePreviewRequest $request): JsonResponse|Fractal {
         $input = $request->only('text');
         $foods = $this->parseFoodsOrErrors($input['text']);
 
@@ -30,7 +31,7 @@ class FoodMenuNoteController extends ApiController {
         return fractal($foods, new FoodMenuNoteTransformer());
     }
 
-    public function store(FoodMenuNoteStoreRequest $request) {
+    public function store(FoodMenuNoteStoreRequest $request): JsonResponse|Fractal {
         $input = $request->only('text');
         $foods = $this->parseFoodsOrErrors($input['text']);
 
@@ -43,6 +44,7 @@ class FoodMenuNoteController extends ApiController {
         return fractal($foodMenus, new FoodMenuTransformer());
     }
 
+    // Helpers
     protected function parseFoodsOrErrors(string $text): array|JsonResponse {
         try {
             return FoodParserHelper::compile($text);

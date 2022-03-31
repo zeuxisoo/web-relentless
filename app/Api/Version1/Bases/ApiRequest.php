@@ -12,7 +12,7 @@ class ApiRequest extends FormRequest {
 
     // Override the default validation failed handler,
     // When missing `Accept: application/json` in header, the response json do not redirect back
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator): void {
         if ($this->container['request'] instanceof Request) {
             throw new HttpResponseException(response()->json([
                 'ok'     => false,
