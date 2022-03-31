@@ -5,9 +5,12 @@ use App\Api\Version1\Enums\TagCategory;
 use App\Models\FoodMenu;
 use App\Models\FoodName;
 use App\Models\FoodUnit;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use MeiliSearch\Endpoints\Indexes;
 
 class FoodMenuService {
 
@@ -15,7 +18,7 @@ class FoodMenuService {
         public FoodMenuItemService $foodMenuItemService
     ) {}
 
-    public function create(array $data) {
+    public function create(array $data): Model {
         $foodMenu = DB::transaction(function() use ($data) {
             // Food menu
             $foodMenu = FoodMenu::create([
@@ -38,13 +41,13 @@ class FoodMenuService {
         return $foodMenu;
     }
 
-    public function list(int $perPage = 8) {
+    public function list(int $perPage = 8): LengthAwarePaginator {
         return $this->userFoodMenuScope()
             ->with('foods.name', 'foods.unit', 'tags')
             ->paginate($perPage);
     }
 
-    public function find(array $data) {
+    public function find(array $data): Model|Collection|static|null {
         $foodMenu      = $this->userFoodMenuScope()->find($data['id']);
         $foodMenuItems = $this->foodMenuItemService->getByFoodMenuId($foodMenu->id);
 
@@ -53,7 +56,7 @@ class FoodMenuService {
         return $foodMenu;
     }
 
-    public function update(array $data) {
+    public function update(array $data): Model|Collection|static|null {
         $foodMenu = DB::transaction(function() use ($data) {
             $foodMenu = $this->find($data);
 
@@ -162,7 +165,7 @@ class FoodMenuService {
         return $foodMenu;
     }
 
-    public function search(string $keyword) {
+    public function search(string $keyword): Collection {
         $foodMenus = [];
 
         if (env('ENABLE_SCOUT', false)) {
@@ -217,7 +220,7 @@ class FoodMenuService {
     }
 
     // Shared methods
-    protected function userFoodMenuScope() {
+    protected function userFoodMenuScope(): Builder {
         return FoodMenu::where('user_id', Auth::id());
     }
 

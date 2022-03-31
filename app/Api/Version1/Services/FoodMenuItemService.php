@@ -6,19 +6,23 @@ use App\Models\FoodMenuItem;
 use App\Models\FoodName;
 use App\Models\FoodUnit;
 use Carbon\Carbon;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class FoodMenuItemService {
 
-    public function list(int $perPage = 8) {
+    public function list(int $perPage = 8): LengthAwarePaginator {
         return $this->userFoodMenuItemScope()->paginate($perPage);
     }
 
-    public function find(array $data) {
+    public function find(array $data): Model|Collection|static|null {
         return $this->userFoodMenuItemScope()->find($data['id']);
     }
 
-    public function insert(array $foods, FoodMenu $foodMenu) {
+    public function insert(array $foods, FoodMenu $foodMenu): bool {
         /**
          * Group by the field value
          *
@@ -72,7 +76,7 @@ class FoodMenuItemService {
         return FoodMenuItem::insert($foodItems);
     }
 
-    public function getByFoodMenuId(int $id) {
+    public function getByFoodMenuId(int $id): Collection {
         // return DB::select("
         //     SELECT
         //         food_menu_items.id AS id,
@@ -106,14 +110,14 @@ class FoodMenuItemService {
             ->get();
     }
 
-    public function deleteByIds(array $ids) {
+    public function deleteByIds(array $ids): int {
         return $this->userFoodMenuItemScope()
             ->whereIn('id', $ids)
             ->delete();
     }
 
     // Shared methods
-    protected function userFoodMenuItemScope() {
+    protected function userFoodMenuItemScope(): Builder {
         return FoodMenuItem::where('user_id', Auth::id());
     }
 
