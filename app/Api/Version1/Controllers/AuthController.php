@@ -15,7 +15,7 @@ class AuthController extends ApiController {
         $user = User::where('username', $input['account'])->first();
 
         if (!$user || Hash::check($input['password'], $user->password) === false) {
-            return $this->respondWithError(__('Invalid credentials, cannot generate token in this stage'));
+            return $this->respondWithFail(__('Invalid credentials, cannot generate token in this stage'));
         }
 
         $token = $user->createToken($request->ip());
@@ -26,7 +26,7 @@ class AuthController extends ApiController {
     public function logout() {
         $this->currentUser()->currentAccessToken()->delete();
 
-        return $this->respondWithOK(trans('Successfully logged out'));
+        return $this->respondWithSuccess(trans('Successfully logged out'));
     }
 
     // Helper methods
@@ -43,7 +43,7 @@ class AuthController extends ApiController {
             $data['expiresIn'] = $token->accessToken->created_at->addMinutes($expiration)->timestamp;
         }
 
-        return $this->respondWithJson($data);
+        return $this->respondWithData($data);
     }
 
 }

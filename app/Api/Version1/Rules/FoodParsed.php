@@ -7,6 +7,7 @@ use App\Parsers\Food\Exceptions\ParserException;
 use App\Parsers\Food\Helper as FoodParserHelper;
 use Illuminate\Contracts\Validation\Rule;
 
+// Currently it is not used
 class FoodParsed implements Rule {
 
     protected string $message;
