@@ -4,7 +4,7 @@ namespace Tests\Feature\Api\Version1\Controllers\FoodMenu;
 use Tests\Feature\Api\Version1\Bases\ApiControllerTestCase;
 use Tests\Feature\Api\Version1\Traits\FoodMenuAction;
 
-class FoodMenuControllerNoteTest extends ApiControllerTestCase {
+class FoodMenuControllerNotePreviewTest extends ApiControllerTestCase {
 
     use FoodMenuAction;
 
