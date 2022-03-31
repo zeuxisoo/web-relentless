@@ -64,6 +64,7 @@ Route::prefix("v1")->group(function() {
 
                 Route::prefix("note")->group(function() {
                     Route::post("preview", [FoodMenuNoteController::class, 'preview'])->name('api.food.menu.note.preview');
+                    Route::post("store",   [FoodMenuNoteController::class, 'store'])->name('api.food.menu.note.store');
                 });
             });
         });
